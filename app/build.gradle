@@ -28,9 +28,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.google.android.gms.maps'
+    implementation 'com.google.android.gms.analytics'
+    implementation 'com.jakewharton:butterknife:10.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    implementation 'com.jakewharton:butterknife:10.2.0'
-    implementation 'com.google.android.gms.analytics'
     implementation 'io.fabric.tools:gradle:1.31.2'
 }
