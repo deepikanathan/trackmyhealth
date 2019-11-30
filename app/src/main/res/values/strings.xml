@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Track My Health</string>
+
+    //  Landing Page
+    <string name="title_landing">Welcome to Track My Health</string>
+    <string name="description_landing">Monitor your health by recording key health indicators and tracking your progress over the years. Make a note of all current medications.</string>
+    <string name="signup_landing">Sign Up</string>
+
+    //  SignUp Page
+    <string name="title_sign_up">Create a new account</string>
+    <string name="first_name_sign_up">FirstName</string>
+    <string name="last_name_sign_up">LastName</string>
+    <string name="email_signup">Email</string>
+    <string name="phone_number_sign_up">PhoneNumber</string>
+    <string name="gender_male_sign_up">Male</string>
+    <string name="gender_female_sign_up">Female</string>
+    <string name="height_sign_up">Height</string>
+    <string name="weight_sign_up">Weight</string>
+    <string name="dob_sign_up">DateOfBirth</string>
+    <string name="title_pcp_sign_up">PCP Info:</string>
+    <string name="pcp_name_sign_up">Name</string>
+    <string name="pcp_address_sign_up">Address</string>
+    <string name="pcp_city_sign_up">City</string>
+    <string name="pcp_country_sign_up">Country</string>
+    <string name="pcp_zip_sign_up">ZipCode</string>
+    <string name="pcp_phone_sign_up">PhoneNumber</string>
+    <string name="add_account_sign_up">Sign Up</string>
+
+    //  weight units spinner resources
+    <string-array name="weight_units_array">
+        <item>lb</item>
+        <item>kg</item>
+    </string-array>
+
+
+
+    //  height units spinner resources
+    <string-array name="height_units_array">
+        <item>ft+in</item>
+        <item>cm</item>
+    </string-array>
+
+
+</resources>
