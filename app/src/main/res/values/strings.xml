@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Track My Health</string>
 
+    //  Splash
+    <string name="splash_image_content_desc">splash image</string>
+
     //  Landing Page
     <string name="title_landing">Welcome to Track My Health</string>
     <string name="description_landing">Monitor your health by recording key health indicators and tracking your progress over the years. Make a note of all current medications.</string>

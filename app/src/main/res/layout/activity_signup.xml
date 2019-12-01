@@ -82,10 +82,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/height_sign_up" />
 
-<!--            <spinner-->
-<!--                android:id="@+id/height_unit_spinner"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_height="wrap_content" />-->
+
+            <Spinner
+                android:id="@+id/height_unit_spinner"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
 
         </LinearLayout>
 
@@ -98,10 +100,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/weight_sign_up" />
-<!--                <spinner-->
-<!--                    android:id="@+id/weight_unit_spinner"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_height="wrap_content" />-->
+                <Spinner
+                    android:id="@+id/weight_unit_spinner"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
 
 
             </LinearLayout>
@@ -132,11 +135,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/pcp_city_sign_up"/>
-                <spinner>
-                    android:id="@+id/country_sign_up_spinner"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                </spinner>
+<!--                <spinner>-->
+<!--                    android:id="@+id/country_sign_up_spinner"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                </spinner>-->
 
                 <EditText
                     android:layout_width="match_parent"
