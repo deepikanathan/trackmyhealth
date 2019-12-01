@@ -26,31 +26,54 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/profileImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:contentDescription="@string/profile_image_sign_up" />
 
             <EditText
+                android:id="@+id/firstNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:autofillHints="@string/first_name_sign_up"
                 android:hint="@string/first_name_sign_up" />
 
             <EditText
+                android:id="@+id/lastNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:autofillHints="@string/last_name_sign_up"
                 android:hint="@string/last_name_sign_up" />
 
             <EditText
+                android:id="@+id/dobEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email_signup" />
+                android:inputType="date"
+                android:autofillHints="@string/dob_sign_up"
+                android:hint="@string/dob_sign_up"/>
 
             <EditText
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="@string/email_signup"
+                android:hint="@string/email_signup"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:autofillHints="@string/phone_number_sign_up"
                 android:hint="@string/phone_number_sign_up" />
 
             <RadioGroup
+                android:id="@+id/genderRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -77,11 +100,13 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/heightEditText"
                 android:layout_weight="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/height_sign_up" />
-
+                android:inputType="number"
+                android:hint="@string/height_sign_up"
+                android:autofillHints="@string/height_sign_up"/>
 
             <Spinner
                 android:id="@+id/height_unit_spinner"
@@ -95,10 +120,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
+                    android:id="@+id/weightEditText"
                     android:layout_weight="2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:autofillHints="@string/weight_sign_up"
                     android:hint="@string/weight_sign_up" />
                 <Spinner
                     android:id="@+id/weight_unit_spinner"
@@ -108,10 +137,6 @@
 
 
             </LinearLayout>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/dob_sign_up"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,27 +149,44 @@
                     android:text="@string/title_pcp_sign_up"
                     android:textSize="@dimen/extra_large_text"/>
                 <EditText
+                    android:id="@+id/pcpNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:autofillHints="@string/pcp_name_sign_up"
                     android:hint="@string/pcp_name_sign_up"/>
                 <EditText
+                    android:id="@+id/pcpAddressEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pcp_address_sign_up"/>
+                    android:inputType="textPostalAddress"
+                    android:hint="@string/pcp_address_sign_up"
+                    android:autofillHints="@string/pcp_address_sign_up" />
                 <EditText
+                    android:id="@+id/pcpCityEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pcp_city_sign_up"/>
-<!--                <spinner>-->
-<!--                    android:id="@+id/country_sign_up_spinner"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                </spinner>-->
+                    android:inputType="text"
+                    android:hint="@string/pcp_city_sign_up"
+                    android:autofillHints="@string/pcp_city_sign_up" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pcpState"/>
+                <Spinner
+                    android:layout_height="0dp"
+                    android:layout_width="match_parent"
+                    android:hint="@string/pcp_country_sign_up"
+                    android:id="@+id/country_sign_up_spinner"
+                    android:layout_weight="1"/>
 
                 <EditText
+                    android:id="@+id/pcpPhoneEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/pcp_phone_sign_up"/>
+                    android:inputType="phone"
+                    android:hint="@string/pcp_phone_sign_up"
+                    android:autofillHints="@string/pcp_phone_sign_up" />
 
             </LinearLayout>
 
@@ -152,6 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:contentDescription="@string/add_account_sign_up"
                 android:text="@string/add_account_sign_up"/>
 
 
