@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:autofillHints="@string/last_name_sign_up"
-                android:hint="@string/last_name_sign_up" />
+                android:hint="@string/last_name_sign_up"
+                />
 
             <EditText
                 android:id="@+id/dobEditText"
@@ -169,17 +170,23 @@
                     android:inputType="text"
                     android:hint="@string/pcp_city_sign_up"
                     android:autofillHints="@string/pcp_city_sign_up" />
+
                 <Spinner
+                    android:id="@+id/state_sign_up_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pcpState"/>
-                <Spinner
-                    android:layout_height="0dp"
-                    android:layout_width="match_parent"
-                    android:hint="@string/pcp_country_sign_up"
-                    android:id="@+id/country_sign_up_spinner"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:hint="@string/pcp_state_sign_up"
+                    android:spinnerMode="dialog" />
 
+                <Spinner
+                    android:id="@+id/country_sign_up_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:hint="@string/pcp_country_sign_up"
+                    android:spinnerMode="dialog" />
                 <EditText
                     android:id="@+id/pcpPhoneEditText"
                     android:layout_width="match_parent"
@@ -196,7 +203,6 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/add_account_sign_up"
                 android:text="@string/add_account_sign_up"/>
-
 
         </LinearLayout>
 
