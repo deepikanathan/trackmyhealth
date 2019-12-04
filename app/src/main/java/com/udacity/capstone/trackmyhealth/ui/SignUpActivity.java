@@ -1,9 +1,14 @@
 package com.udacity.capstone.trackmyhealth.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,26 +22,42 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    Spinner heightSpinner;
+    Spinner weightSpinner;
+    Spinner stateSpinner;
+    Spinner countrySpinner;
+
+    String heightUnit, weightUnit, state, country;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signup);
 
-        Spinner heightSpinner = findViewById(R.id.height_unit_spinner);
+        Button signUpButton = findViewById(R.id.addAccount);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                CreateAccount();
+            }
+        });
+
+        heightSpinner = findViewById(R.id.height_unit_spinner);
         heightSpinner.setOnItemSelectedListener(this);
         populateHeightUnits(heightSpinner);
 
-
-        Spinner weightSpinner = findViewById(R.id.weight_unit_spinner);
+        weightSpinner = findViewById(R.id.weight_unit_spinner);
         weightSpinner.setOnItemSelectedListener(this);
         populateWeightUnits(weightSpinner);
 
-        Spinner stateSpinner = findViewById(R.id.state_sign_up_spinner);
+        stateSpinner = findViewById(R.id.state_sign_up_spinner);
         stateSpinner.setOnItemSelectedListener(this);
         populateState(stateSpinner);
 
-        Spinner countrySpinner = findViewById(R.id.country_sign_up_spinner);
+        countrySpinner = findViewById(R.id.country_sign_up_spinner);
         countrySpinner.setOnItemSelectedListener(this);
         populateCountry(countrySpinner);
 
@@ -86,12 +107,55 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
 
-        // Showing selected spinner item
+        switch (parent.getId())
+        {
+            case R.id.height_unit_spinner:
+                heightUnit = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.weight_unit_spinner:
+                weightUnit = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.state_sign_up_spinner:
+                state = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.country_sign_up_spinner:
+                country = parent.getItemAtPosition(position).toString();
+                break;
+        }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+    }
+
+    public void CreateAccount() {
+
+        boolean isMale = true;
+        RadioGroup gender = findViewById(R.id.genderRadioGroup);
+        int selectedId = gender.getCheckedRadioButtonId();
+        if (selectedId == R.id.gender_female) {
+            isMale = false;
+        }
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("User",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(getResources().getString(R.string.first_name_sign_up), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.last_name_sign_up), ((EditText)findViewById(R.id.lastNameTextView)).getText().toString());
+        editor.putString(getResources().getString(R.string.dob_sign_up), ((EditText)findViewById(R.id.dobEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.email_sign_up), ((EditText)findViewById(R.id.emailEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.phone_number_sign_up), ((EditText)findViewById(R.id.phoneEditText)).getText().toString());
+        editor.putBoolean(getResources().getString(R.string.gender), isMale);
+        editor.putString(getResources().getString(R.string.height_sign_up), ((EditText)findViewById(R.id.heightEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.weight_sign_up), ((EditText)findViewById(R.id.weightEditText)).getText().toString());
+
+        editor.putString(getResources().getString(R.string.pcp_name_sign_up), ((EditText)findViewById(R.id.pcpNameEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.pcp_address_sign_up), ((EditText)findViewById(R.id.pcpAddressEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.pcp_city_sign_up), ((EditText)findViewById(R.id.pcpCityEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.pcp_state_sign_up), state);
+        editor.putString(getResources().getString(R.string.pcp_country_sign_up), country);
+        editor.putString(getResources().getString(R.string.pcp_zip_sign_up), ((EditText)findViewById(R.id.pcpZipEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.pcp_phone_sign_up), ((EditText)findViewById(R.id.pcpPhoneEditText)).getText().toString());
+
+        editor.commit(); // commit changes
     }
 }

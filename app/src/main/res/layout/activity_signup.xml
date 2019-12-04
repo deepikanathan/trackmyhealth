@@ -61,8 +61,8 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/email_signup"
-                android:hint="@string/email_signup"
+                android:autofillHints="@string/email_sign_up"
+                android:hint="@string/email_sign_up"
                 android:inputType="textEmailAddress"/>
 
             <EditText
@@ -142,12 +142,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/large_padding">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/title_pcp_sign_up"
+                    android:textStyle="bold"
                     android:textSize="@dimen/extra_large_text"/>
                 <EditText
                     android:id="@+id/pcpNameEditText"
@@ -176,6 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/large_text"
                     android:hint="@string/pcp_state_sign_up"
                     android:spinnerMode="dialog" />
 
@@ -184,9 +187,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
+                    android:textSize="@dimen/large_text"
                     android:hint="@string/pcp_country_sign_up"
                     android:spinnerMode="dialog" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pcpZipEditText"
+                    android:inputType="number"
+                    android:hint="@string/pcp_zip_sign_up"
+                    android:autofillHints="@string/pcp_zip_sign_up" />
+
                 <EditText
                     android:id="@+id/pcpPhoneEditText"
                     android:layout_width="match_parent"
@@ -198,6 +210,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/addAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
