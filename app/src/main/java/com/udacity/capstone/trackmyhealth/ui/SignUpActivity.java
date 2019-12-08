@@ -1,5 +1,6 @@
 package com.udacity.capstone.trackmyhealth.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 CreateAccount();
-            }
+                }
         });
 
         heightSpinner = findViewById(R.id.height_unit_spinner);
@@ -156,6 +157,9 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         editor.putString(getResources().getString(R.string.pcp_zip_sign_up), ((EditText)findViewById(R.id.pcpZipEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.pcp_phone_sign_up), ((EditText)findViewById(R.id.pcpPhoneEditText)).getText().toString());
 
-        editor.commit(); // commit changes
+        editor.commit();
+
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
