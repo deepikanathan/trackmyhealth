@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:key="units_category"
+        app:title="Units">
+
+        <ListPreference
+            android:id="@+id/heights"
+            android:key="@string/height_key"
+            android:title="Height"
+            android:summary="height"
+            android:entries="@array/height_list"
+            android:entryValues="@array/height_values"
+            android:defaultValue="lb_value"
+            ></ListPreference>
+
+    </PreferenceCategory>
+
+<!--    <ListPreference-->
+<!--        android:key="@string/sort_order_key"-->
+<!--        android:title="@string/sort_order_title"-->
+<!--        android:summary="@string/sort_order_summary"-->
+<!--        android:entries="@array/listentries"-->
+<!--        android:entryValues="@array/listvalues"-->
+<!--        android:defaultValue="most_popular">-->
+
+<!--    </ListPreference>-->
+</PreferenceScreen>

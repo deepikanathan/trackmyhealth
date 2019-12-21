@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginTop="40dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         android:text="@string/profile_full_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilepic" />
@@ -32,8 +32,9 @@
         android:id="@+id/nameValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.346"
         app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/name"
         tools:text="John Smith" />
@@ -44,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_email"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -52,10 +53,10 @@
         android:id="@+id/emailValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="@+id/nameValue"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nameValue"
         app:layout_constraintTop_toTopOf="@+id/email"
         tools:text="john.smith@gmail.com" />
 
@@ -65,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_dob"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
@@ -73,51 +74,76 @@
         android:id="@+id/dobValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/extra_large_text"
+        android:layout_marginEnd="32dp"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="@+id/emailValue"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/dob"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nameValue"
         app:layout_constraintTop_toTopOf="@+id/dob"
         tools:text="1/1/1990" />
 
     <TextView
-        android:id="@+id/ice"
+        android:id="@+id/iceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_ice"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="@+id/dob"
         app:layout_constraintTop_toBottomOf="@+id/dob" />
 
     <TextView
-        android:id="@+id/iceValue"
+        android:id="@+id/iceNameValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="999-999-9999"
-        android:textSize="@dimen/extra_large_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ice"
-        app:layout_constraintTop_toTopOf="@+id/ice" />
+        android:textSize="@dimen/large_text"
+        app:layout_constraintEnd_toEndOf="@+id/dobValue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/icePhoneValue"
+        app:layout_constraintTop_toTopOf="@+id/icePhone"
+        tools:text="John Smith" />
+
+    <TextView
+        android:id="@+id/icePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/profile_ice_phone"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintStart_toStartOf="@+id/iceName"
+        app:layout_constraintTop_toBottomOf="@+id/iceName" />
+
+    <TextView
+        android:id="@+id/icePhoneValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintEnd_toEndOf="@+id/dobValue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/dobValue"
+        app:layout_constraintTop_toTopOf="@+id/iceName"
+        tools:text="999-999-9999" />
 
     <TextView
         android:id="@+id/gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         android:text="@string/profile_gender"
-        app:layout_constraintStart_toStartOf="@+id/ice"
-        app:layout_constraintTop_toBottomOf="@+id/ice" />
+        app:layout_constraintStart_toStartOf="@+id/icePhone"
+        app:layout_constraintTop_toBottomOf="@+id/icePhone" />
 
     <TextView
         android:id="@+id/genderValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Male"
-        android:textSize="@dimen/extra_large_text"
-        app:layout_constraintEnd_toEndOf="@+id/iceValue"
-        app:layout_constraintTop_toTopOf="@+id/gender" />
+        android:textSize="@dimen/large_text"
+        app:layout_constraintEnd_toEndOf="@+id/icePhoneValue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/icePhoneValue"
+        app:layout_constraintTop_toTopOf="@+id/gender"
+        tools:text="Male" />
 
     <TextView
         android:id="@+id/height"
@@ -125,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/height_sign_up"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="@+id/gender"
         app:layout_constraintTop_toBottomOf="@+id/gender" />
 
@@ -133,10 +159,12 @@
         android:id="@+id/heightValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="165cm"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="@+id/genderValue"
-        app:layout_constraintTop_toTopOf="@+id/height" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/icePhoneValue"
+        app:layout_constraintTop_toTopOf="@+id/height"
+        tools:text="165cm" />
 
     <TextView
         android:id="@+id/weight"
@@ -144,7 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_weight"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="@+id/height"
         app:layout_constraintTop_toBottomOf="@+id/height" />
 
@@ -152,17 +180,19 @@
         android:id="@+id/weightValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="110lb"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="@+id/heightValue"
-        app:layout_constraintTop_toTopOf="@+id/weight" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/icePhoneValue"
+        app:layout_constraintTop_toTopOf="@+id/weight"
+        tools:text="110lb" />
 
     <TextView
         android:id="@+id/pcpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         android:textStyle="bold"
         android:text="@string/profile_pcp_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         tools:text="Dr. James Gordon"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pcpTitle"
@@ -187,7 +217,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pcpName"
@@ -199,7 +229,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pcpAddress1"
@@ -207,11 +237,11 @@
         tools:text="Tulsa" />
 
     <TextView
-        android:id="@+id/pcpCountry"
+        android:id="@+id/pcpState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pcpCity"
@@ -224,11 +254,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         tools:text="77777"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/pcpCountry"
-        app:layout_constraintTop_toBottomOf="@+id/pcpCountry" />
+        app:layout_constraintStart_toStartOf="@+id/pcpState"
+        app:layout_constraintTop_toBottomOf="@+id/pcpState" />
 
     <TextView
         android:id="@+id/pcpPhone"
@@ -237,7 +267,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="324dp"
         tools:text="111-111-1111"
-        android:textSize="@dimen/extra_large_text"
+        android:textSize="@dimen/large_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pcpZip"

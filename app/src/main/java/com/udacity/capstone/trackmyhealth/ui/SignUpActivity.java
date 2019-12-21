@@ -146,6 +146,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         editor.putString(getResources().getString(R.string.email_sign_up), ((EditText)findViewById(R.id.emailEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.phone_number_sign_up), ((EditText)findViewById(R.id.phoneEditText)).getText().toString());
         editor.putBoolean(getResources().getString(R.string.gender), isMale);
+        editor.putString(getResources().getString(R.string.ice_name_sign_up), ((EditText)findViewById(R.id.iceNameEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.ice_phone_number_sign_up), ((EditText)findViewById(R.id.icePhoneEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.height_sign_up), ((EditText)findViewById(R.id.heightEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.weight_sign_up), ((EditText)findViewById(R.id.weightEditText)).getText().toString());
 

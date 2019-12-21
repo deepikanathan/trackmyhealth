@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.udacity.capstone.trackmyhealth.R;
 
@@ -18,14 +22,27 @@ public class LandingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_landing);
 
-        Button signUpButton = findViewById(R.id.sign_up_button);
+        //  add toolbar
+  //      Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                InvokeSignUpActivity();
-            }
-        });
 
+//        Button signUpButton = findViewById(R.id.sign_up_button);
+//
+//        signUpButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                InvokeSignUpActivity();
+//            }
+//        });
+
+    }
+
+    private void setActionBarTitle() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Track Your Health");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void InvokeSignUpActivity()

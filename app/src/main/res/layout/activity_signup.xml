@@ -36,7 +36,7 @@
                 android:id="@+id/firstNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:autofillHints="@string/first_name_sign_up"
                 android:hint="@string/first_name_sign_up" />
 
@@ -72,6 +72,22 @@
                 android:inputType="phone"
                 android:autofillHints="@string/phone_number_sign_up"
                 android:hint="@string/phone_number_sign_up" />
+
+            <EditText
+                android:id="@+id/iceNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:autofillHints="@string/ice_name_sign_up"
+                android:hint="@string/ice_name_sign_up" />
+
+            <EditText
+                android:id="@+id/icePhoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:autofillHints="@string/ice_phone_number_sign_up"
+                android:hint="@string/ice_phone_number_sign_up" />
 
             <RadioGroup
                 android:id="@+id/genderRadioGroup"
