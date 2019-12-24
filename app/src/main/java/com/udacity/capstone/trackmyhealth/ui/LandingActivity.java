@@ -22,6 +22,8 @@ public class LandingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_landing);
 
+
+
         //  add toolbar
   //      Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -37,18 +39,18 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
-    private void setActionBarTitle() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("Track Your Health");
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    private void InvokeSignUpActivity()
-    {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
+//    private void setActionBarTitle() {
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setTitle("Track Your Health");
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
+//    }
+//
+//    private void InvokeSignUpActivity()
+//    {
+//        Intent intent = new Intent(this, SignUpActivity.class);
+//        startActivity(intent);
+//    }
 
 }

@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="height_list">
+        <item>@string/centimeters</item>
+        <item>@string/inches</item>
+    </string-array>
+
+    <string-array name="height_values">
+        <item>@string/centimeters_value</item>
+        <item>@string/inches_value</item>
+    </string-array>
+
+    <string-array name="weight_list">
         <item>@string/pounds</item>
         <item>@string/kilograms</item>
     </string-array>
 
-    <string-array name="height_values">
+    <string-array name="weight_values">
         <item>@string/pounds_value</item>
         <item>@string/kilograms_value</item>
     </string-array>

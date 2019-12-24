@@ -12,8 +12,18 @@
             android:summary="height"
             android:entries="@array/height_list"
             android:entryValues="@array/height_values"
+            android:defaultValue="@string/centimeters_value"
+            />
+
+        <ListPreference
+            android:id="@+id/weights"
+            android:key="@string/weight_key"
+            android:title="Weight"
+            android:summary="weight"
+            android:entries="@array/weight_list"
+            android:entryValues="@array/weight_values"
             android:defaultValue="lb_value"
-            ></ListPreference>
+            />
 
     </PreferenceCategory>
 
