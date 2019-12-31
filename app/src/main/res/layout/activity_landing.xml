@@ -1,42 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    <android.support.design.widget.AppBarLayout
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/title_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-    </android.support.design.widget.AppBarLayout>
+        android:gravity="center"
+        android:text="@string/title_landing"
+        android:paddingTop="@dimen/extra_large_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/title_textView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/title_landing"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/description_landing"
+        android:autofillHints="" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/editText"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="start|top"-->
-<!--        android:inputType="textMultiLine"-->
-<!--        android:text="@string/description_landing"-->
-<!--        android:autofillHints="" />-->
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_landing"
+        android:hint="@string/add_account_sign_up"/>
+</LinearLayout>
 
-<!--    <Button-->
-<!--        android:id="@+id/sign_up_button"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/signup_landing"-->
-<!--        android:hint="@string/add_account_sign_up"/>-->
-</android.support.design.widget.CoordinatorLayout>
+
+<!--    tools:context=".ui.OptionsActivity"-->

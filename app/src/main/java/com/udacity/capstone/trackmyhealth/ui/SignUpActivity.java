@@ -2,65 +2,126 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.squareup.picasso.Picasso;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.utils.PopulateSpinner;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner heightSpinner;
-    Spinner weightSpinner;
-    Spinner stateSpinner;
-    Spinner countrySpinner;
+
 
     String heightUnit, weightUnit, state, country;
+    String userProfilePicture;
+
+    @BindView (R.id.profileImageView)
+    ImageView profileImageView;
+    @BindView(R.id.addAccount)
+    Button signUpButton;
+    @BindView(R.id.weight_unit_spinner)
+    Spinner weightSpinner;
+    @BindView(R.id.height_unit_spinner)
+    Spinner heightSpinner;
+    @BindView(R.id.state_sign_up_spinner)
+    Spinner stateSpinner;
+//    @BindView(R.id.country_sign_up_spinner)
+//    Spinner countrySpinner;
+
+    private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signup);
+        ButterKnife.bind(this);
 
-        Button signUpButton = findViewById(R.id.addAccount);
         signUpButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 CreateAccount();
                 }
         });
 
-        heightSpinner = findViewById(R.id.height_unit_spinner);
+        Picasso.get()
+                .load(R.drawable.user_48x48)
+                .placeholder(R.drawable.user_48x48)
+                .into(profileImageView);
+
         heightSpinner.setOnItemSelectedListener(this);
         populateHeightUnits(heightSpinner);
 
-        weightSpinner = findViewById(R.id.weight_unit_spinner);
         weightSpinner.setOnItemSelectedListener(this);
         populateWeightUnits(weightSpinner);
 
-        stateSpinner = findViewById(R.id.state_sign_up_spinner);
         stateSpinner.setOnItemSelectedListener(this);
         populateState(stateSpinner);
 
-        countrySpinner = findViewById(R.id.country_sign_up_spinner);
-        countrySpinner.setOnItemSelectedListener(this);
-        populateCountry(countrySpinner);
+//        countrySpinner.setOnItemSelectedListener(this);
+//        populateCountry(countrySpinner);
+
+        Button buttonLoadImage = findViewById(R.id.importProfilePicture);
+        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        try {
+            if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+
+                Uri selectedImage = data.getData();
+                InputStream imageStream = null;
+                imageStream = getContentResolver().openInputStream(selectedImage);
+                Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                ImageView imageView = findViewById(R.id.profileImageView);
+                imageView.setImageBitmap(yourSelectedImage);
+                //userProfilePicture = imageStream;
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -140,6 +201,13 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("User",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+
+
+        editor.putString(getResources().getString(R.string.profile_picture), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
+
+
+
+
         editor.putString(getResources().getString(R.string.first_name_sign_up), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.last_name_sign_up), ((EditText)findViewById(R.id.lastNameTextView)).getText().toString());
         editor.putString(getResources().getString(R.string.dob_sign_up), ((EditText)findViewById(R.id.dobEditText)).getText().toString());
@@ -155,13 +223,13 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         editor.putString(getResources().getString(R.string.pcp_address_sign_up), ((EditText)findViewById(R.id.pcpAddressEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.pcp_city_sign_up), ((EditText)findViewById(R.id.pcpCityEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.pcp_state_sign_up), state);
-        editor.putString(getResources().getString(R.string.pcp_country_sign_up), country);
+//        editor.putString(getResources().getString(R.string.pcp_country_sign_up), country);
         editor.putString(getResources().getString(R.string.pcp_zip_sign_up), ((EditText)findViewById(R.id.pcpZipEditText)).getText().toString());
         editor.putString(getResources().getString(R.string.pcp_phone_sign_up), ((EditText)findViewById(R.id.pcpPhoneEditText)).getText().toString());
 
         editor.commit();
 
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
 }

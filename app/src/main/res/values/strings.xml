@@ -11,7 +11,8 @@
 
     //  SignUp Page
     <string name="title_sign_up">Create a new account</string>
-    <string name="profile_image_sign_up">Profile Picture</string>
+    <string name="profile_image_sign_up">Add a Picture</string>
+    <string name="profile_picture">ProfilePicture</string>
     <string name="first_name_sign_up">FirstName</string>
     <string name="last_name_sign_up">LastName</string>
     <string name="dob_sign_up">DateOfBirth</string>
@@ -77,5 +78,12 @@
     <string name="centimeters_value">cm_value</string>
     <string name="inches">in</string>
     <string name="inches_value">in_value</string>
+
+    //  options screen
+    <string name="profile_screen">My Profile</string>
+    <string name="journal_screen">Journal</string>
+    <string name="medications_screen">Medications</string>
+    <string name="doc_visit_screen">Log Doctor Visit</string>
+
 
 </resources>

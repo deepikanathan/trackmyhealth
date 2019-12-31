@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        tools:context=".ui.OptionsActivity"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/options"
+        android:visibility="invisible">
+        <include layout="@layout/activity_options" />
+    </LinearLayout>
+    <LinearLayout
+        tools:context=".ui.LandingActivity"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/landing"
+        android:visibility="invisible">
+        <include layout="@layout/activity_landing" />
+    </LinearLayout>
+</LinearLayout>
