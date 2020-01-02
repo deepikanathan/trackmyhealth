@@ -77,7 +77,7 @@
                 android:id="@+id/lastNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:autofillHints="@string/last_name_sign_up"
                 android:hint="@string/last_name_sign_up"
                 tools:text="timberlake"/>
@@ -107,7 +107,8 @@
                 android:inputType="phone"
                 android:autofillHints="@string/phone_number_sign_up"
                 android:hint="@string/phone_number_sign_up"
-                tools:text="1112223333"/>
+                tools:text="1112223333"
+                android:maxLength="10"/>
 
             <EditText
                 android:id="@+id/iceNameEditText"
@@ -125,7 +126,8 @@
                 android:inputType="phone"
                 android:autofillHints="@string/ice_phone_number_sign_up"
                 android:hint="@string/ice_phone_number_sign_up"
-                tools:text="7778889999"/>
+                tools:text="7778889999"
+                android:maxLength="10"/>
 
             <RadioGroup
                 android:id="@+id/genderRadioGroup"
@@ -257,7 +259,8 @@
                     android:inputType="number"
                     android:hint="@string/pcp_zip_sign_up"
                     android:autofillHints="@string/pcp_zip_sign_up"
-                    tools:text="12345"/>
+                    tools:text="12345"
+                    android:maxLength="5"/>
 
                 <EditText
                     android:id="@+id/pcpPhoneEditText"
@@ -266,7 +269,8 @@
                     android:inputType="phone"
                     android:hint="@string/pcp_phone_sign_up"
                     android:autofillHints="@string/pcp_phone_sign_up"
-                    tools:text="0000000000"/>
+                    tools:text="0000000000"
+                    android:maxLength="10"/>
 
             </LinearLayout>
 

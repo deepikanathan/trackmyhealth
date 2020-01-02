@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,8 +25,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.utils.ImageConverter;
 import com.udacity.capstone.trackmyhealth.utils.PopulateSpinner;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -181,13 +186,21 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.state_sign_up_spinner:
                 state = parent.getItemAtPosition(position).toString();
                 break;
-            case R.id.country_sign_up_spinner:
-                country = parent.getItemAtPosition(position).toString();
-                break;
+//            case R.id.country_sign_up_spinner:
+//                country = parent.getItemAtPosition(position).toString();
+//                break;
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+    }
+
+
+    private String imageToString() {
+
+        ImageView imageView = findViewById(R.id.profileImageView);
+        Bitmap bitmap =((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        return ImageConverter.imageToString(bitmap);
     }
 
     public void CreateAccount() {
@@ -203,7 +216,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         SharedPreferences.Editor editor = pref.edit();
 
 
-        editor.putString(getResources().getString(R.string.profile_picture), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
+        editor.putString(getResources().getString(R.string.profile_picture), imageToString());
 
 
 
@@ -229,7 +242,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         editor.commit();
 
-        Intent intent = new Intent(this, OptionsActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 }

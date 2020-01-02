@@ -2,15 +2,22 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.utils.ImageConverter;
+
+import java.io.File;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -18,6 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String mypreference = "User";
 
 
+    @BindView (R.id.profilePic)
+    ImageView profilePic;
     @BindView(R.id.emailValue)
     TextView email;
     @BindView(R.id.dobValue)
@@ -45,13 +54,31 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.pcpPhone)
     TextView pcpPhone;
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
+        ButterKnife.bind(this);
 
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
+
+        //  Profile Picture
+        if (sharedpreferences.contains(getResources().getString(R.string.profile_picture))) {
+            String imgAsString = sharedpreferences.getString(getResources().getString(R.string.profile_picture), "");
+            if (!imgAsString.isEmpty()) {
+                Bitmap bmp = ImageConverter.stringToBitMap(imgAsString);
+                profilePic.setImageBitmap(bmp);
+
+//                Picasso.get()
+//                        .load(imgAsString)
+//                        .placeholder(R.drawable.user_48x48)
+//                        .error(R.drawable.user_48x48)
+//                        .into(profilePic);
+            }
+        }
 
         //  name
         setName();
