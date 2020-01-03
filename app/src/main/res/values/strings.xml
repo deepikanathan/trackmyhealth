@@ -51,7 +51,8 @@
     <string name="profile_pcp_address">Address</string>
     <string name="map_it_button">Directions</string>
 
-
+    //  Medication DB
+    <string name="medication_database">medication_db</string>
 
     //  weight units spinner resources
     <string-array name="weight_units_array">
