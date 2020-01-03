@@ -219,6 +219,10 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         editor.putString(getResources().getString(R.string.profile_picture), imageToString());
 
 
+        if (((EditText)findViewById(R.id.firstNameEditText)).getText().toString().isEmpty()) {
+            ((EditText) findViewById(R.id.firstNameEditText)).setError("FirstName cannot be empty");
+        }
+
 
 
         editor.putString(getResources().getString(R.string.first_name_sign_up), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
@@ -242,7 +246,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         editor.commit();
 
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
 }

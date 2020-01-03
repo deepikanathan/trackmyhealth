@@ -49,6 +49,7 @@
     <string name="profile_weight">Weight</string>
     <string name="profile_pcp_title">PCP Information</string>
     <string name="profile_pcp_address">Address</string>
+    <string name="map_it_button">Directions</string>
 
 
 
@@ -84,6 +85,7 @@
     <string name="journal_screen">Journal</string>
     <string name="medications_screen">Medications</string>
     <string name="doc_visit_screen">Log Doctor Visit</string>
+    <string name="settings_screen">Settings</string>
 
 
 </resources>
