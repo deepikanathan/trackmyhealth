@@ -56,7 +56,7 @@ public class OptionsActivity extends AppCompatActivity {
         medicationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                Intent intent = new Intent(v.getContext(), MedicationsActivity.class);
                 startActivity(intent);
             }
         });

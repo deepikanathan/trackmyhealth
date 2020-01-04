@@ -10,7 +10,8 @@ import com.udacity.capstone.trackmyhealth.R;
 public abstract class AppDatabase extends RoomDatabase
 {
 
-    public abstract MovieDao movieDao();
+    public abstract MedicationDao medicationDao();
+
     private static AppDatabase INSTANCE;
 
 
