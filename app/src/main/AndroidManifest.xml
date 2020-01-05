@@ -19,6 +19,9 @@
         <activity android:name=".ui.SignUpActivity"/>
         <activity android:name=".ui.ProfileActivity"/>
         <activity android:name=".ui.OptionsActivity"/>
+        <activity android:name=".ui.MedicationEditActivity"/>
+        <activity android:name=".ui.MedicationsActivity"/>
+        <activity android:name=".ui.LandingActivity"/>
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/settings"

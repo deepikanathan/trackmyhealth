@@ -74,7 +74,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Me
             dose = itemView.findViewById(R.id.dose);
             unit = itemView.findViewById(R.id.unit);
             frequency = itemView.findViewById(R.id.frequency);
-
+            editImage = itemView.findViewById(R.id.edit_Image);
             editImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

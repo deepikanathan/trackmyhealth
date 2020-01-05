@@ -40,7 +40,7 @@ public class OptionsActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -48,7 +48,7 @@ public class OptionsActivity extends AppCompatActivity {
         journalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +56,7 @@ public class OptionsActivity extends AppCompatActivity {
         medicationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MedicationsActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, MedicationsActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +64,7 @@ public class OptionsActivity extends AppCompatActivity {
         doctorsVisitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +72,7 @@ public class OptionsActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SettingsActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });

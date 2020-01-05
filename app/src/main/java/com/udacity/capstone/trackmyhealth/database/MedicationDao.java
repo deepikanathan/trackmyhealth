@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface MedicationDao {
 
-    @Query("SELECT * FROM medication")
+    @Query("SELECT * FROM medication ORDER BY ID")
     LiveData<List<Medication>> getAllMedications();
 
     @Query("SELECT COUNT(ID) FROM medication")

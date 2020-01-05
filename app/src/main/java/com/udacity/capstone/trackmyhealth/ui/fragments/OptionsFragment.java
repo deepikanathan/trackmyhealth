@@ -15,11 +15,10 @@ import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.ui.SignUpActivity;
 
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class OptionsFragment extends Fragment {
 
-    private Unbinder unbinder;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,6 @@ public class OptionsFragment extends Fragment {
                 }
             });
 
-       // unbinder = ButterKnife.bind(this, viewRoot);
         return viewRoot;
     }
 
@@ -60,7 +58,6 @@ public class OptionsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
 
