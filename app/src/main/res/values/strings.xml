@@ -89,12 +89,18 @@
     <string name="settings_screen">Settings</string>
 
     //  Add Medication screen
+    <string name="title_add_medication">Add new medication</string>
     <string name="med_name">Medicine Name</string>
     <string name="med_dose">Medicine Dose</string>
     <string name="med_unit">Medicine Unit</string>
     <string name="med_frequency">Medicine Frequency</string>
     <string name="med_add">Add Medicine</string>
     <string name="metformin">Metformin</string>
+    <string name="dose">500</string>
+    <string name="mg">mg</string>
+    <string name="once_a_day">once a day</string>
+    <string name="update">Update</string>
+    <string name="edit_medication">Edit Medication</string>
 
 
 

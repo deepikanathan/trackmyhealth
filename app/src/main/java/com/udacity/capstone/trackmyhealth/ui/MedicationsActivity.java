@@ -60,9 +60,9 @@ public class MedicationsActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new MedicationAdapter(this);
+        mAdapter = new MedicationAdapter(this, MedicationsActivity.this);
         mRecyclerView.setAdapter(mAdapter);
-        mDb = AppDatabase.getDatabase(getApplicationContext());
+        mDb = AppDatabase.getInstance(getApplicationContext());
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -88,11 +88,18 @@ public class MedicationsActivity extends AppCompatActivity {
         retrieveTasks();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveTasks();
+    }
+
     private void retrieveTasks() {
+
         mDb.medicationDao().getAllMedications().observe(this, new Observer<List<Medication>>() {
             @Override
-            public void onChanged(@Nullable List<Medication> people) {
-                mAdapter.setTasks(people);
+            public void onChanged(@Nullable List<Medication> medications) {
+                mAdapter.setTasks(medications);
             }
         });
     }

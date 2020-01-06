@@ -1,5 +1,6 @@
 package com.udacity.capstone.trackmyhealth.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.database.AppDatabase;
+import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.Medication;
 import com.udacity.capstone.trackmyhealth.ui.MedicationEditActivity;
 
@@ -22,10 +25,13 @@ import java.util.List;
 public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.MedicationViewHolder> {
 
     private Context context;
+    private Intent intent;
     private List<Medication> mMedicationList;
 
-    public MedicationAdapter(Context context) {
+    public MedicationAdapter(Context context, Activity activity) {
+
         this.context = context;
+        this.intent = activity.getIntent();
     }
 
     @NonNull
@@ -64,16 +70,17 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Me
 
     class MedicationViewHolder extends RecyclerView.ViewHolder {
         TextView name, dose, unit, frequency;
-        ImageView editImage;
+        ImageView editImage, deleteImage;
         AppDatabase mDb;
 
         MedicationViewHolder(@NonNull final View itemView) {
             super(itemView);
-            mDb = AppDatabase.getDatabase(context);
+            mDb = AppDatabase.getInstance(context);
             name = itemView.findViewById(R.id.medication_name);
             dose = itemView.findViewById(R.id.dose);
             unit = itemView.findViewById(R.id.unit);
             frequency = itemView.findViewById(R.id.frequency);
+
             editImage = itemView.findViewById(R.id.edit_Image);
             editImage.setOnClickListener(new View.OnClickListener() {
                 @Override

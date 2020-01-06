@@ -34,10 +34,10 @@ public class MedicationEditActivity extends AppCompatActivity {
 
         initViews();
 
-        mDb = AppDatabase.getDatabase(getApplicationContext());
+        mDb = AppDatabase.getInstance(getApplicationContext());
         intent = getIntent();
         if (intent != null && intent.hasExtra(Constants.UPDATE_Medication_Id)) {
-            button.setText("Update");
+            button.setText(R.string.update);
             mMedicationId = intent.getIntExtra(Constants.UPDATE_Medication_Id, -1);
 
             AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -71,17 +71,15 @@ public class MedicationEditActivity extends AppCompatActivity {
                 unit.getText().toString(),
                 frequncy.getText().toString());
 
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
-                    mDb.medicationDao().insert(medi);
-                } else {
-                    medi.setId(mMedicationId);
-                    mDb.medicationDao().updatePerson(medi);
-                }
-                finish();
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
+                mDb.medicationDao().insert(medi);
+                int i = mDb.medicationDao().getCount();
+            } else {
+                medi.setId(mMedicationId);
+                mDb.medicationDao().update(medi);
             }
+            finish();
         });
     }
 

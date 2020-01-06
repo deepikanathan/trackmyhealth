@@ -10,8 +10,7 @@ import androidx.room.PrimaryKey;
 
 public class Medication {
 
-    @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
 
@@ -28,8 +27,8 @@ public class Medication {
     @ColumnInfo(name = "frequency")
     private String frequency;
 
-    public Medication() {
-    }
+//    public Medication() {
+//    }
 
     @Ignore
     public Medication(String name, String dose, String unit, String frequency) {
@@ -91,11 +90,7 @@ public class Medication {
     @Override
     public boolean equals(Object obj) {
         Medication m = (Medication) obj;
-        if(id == m.getId()){
-            return true;
-        }else{
-            return false;
-        }
+        return id == m.getId();
     }
 
 

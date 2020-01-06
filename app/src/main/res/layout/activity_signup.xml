@@ -68,6 +68,9 @@
                 android:id="@+id/firstNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:inputType="textCapCharacters"
                 android:autofillHints="@string/first_name_sign_up"
                 android:hint="@string/first_name_sign_up"
@@ -78,6 +81,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapCharacters"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:autofillHints="@string/last_name_sign_up"
                 android:hint="@string/last_name_sign_up"
                 tools:text="timberlake"/>
@@ -87,6 +93,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:autofillHints="@string/dob_sign_up"
                 android:hint="@string/dob_sign_up"
                 tools:text="01/01/1980"/>
@@ -96,6 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/email_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:hint="@string/email_sign_up"
                 android:inputType="textEmailAddress"
                 tools:text="justy@gmail.com"/>
@@ -106,6 +118,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:autofillHints="@string/phone_number_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:hint="@string/phone_number_sign_up"
                 tools:text="1112223333"
                 android:maxLength="10"/>
@@ -116,6 +131,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:autofillHints="@string/ice_name_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:hint="@string/ice_name_sign_up"
                 tools:text="drew"/>
 
@@ -125,6 +143,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:autofillHints="@string/ice_phone_number_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 android:hint="@string/ice_phone_number_sign_up"
                 tools:text="7778889999"
                 android:maxLength="10"/>
@@ -164,13 +185,19 @@
                 android:inputType="number"
                 android:hint="@string/height_sign_up"
                 android:autofillHints="@string/height_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border"
                 tools:text="5"/>
 
             <Spinner
                 android:id="@+id/height_unit_spinner"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:padding="@dimen/extra_large_padding"
+                android:background="@drawable/border" />
 
         </LinearLayout>
 
@@ -186,11 +213,17 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:autofillHints="@string/weight_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     android:hint="@string/weight_sign_up"
                     tools:text="123"/>
                 <Spinner
                     android:id="@+id/weight_unit_spinner"
                     android:layout_weight="1"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
 
@@ -215,6 +248,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:autofillHints="@string/pcp_name_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     android:hint="@string/pcp_name_sign_up"
                     tools:text="adam anderson"/>
                 <EditText
@@ -224,6 +260,9 @@
                     android:inputType="textPostalAddress"
                     android:hint="@string/pcp_address_sign_up"
                     android:autofillHints="@string/pcp_address_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     tools:text="100 north dallas tollway"/>
                 <EditText
                     android:id="@+id/pcpCityEditText"
@@ -232,15 +271,21 @@
                     android:inputType="text"
                     android:hint="@string/pcp_city_sign_up"
                     android:autofillHints="@string/pcp_city_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     tools:text="dallas"/>
 
                 <Spinner
                     android:id="@+id/state_sign_up_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/large_text"
                     android:hint="@string/pcp_state_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     android:spinnerMode="dialog" />
 
 <!--                <Spinner-->
@@ -259,6 +304,9 @@
                     android:inputType="number"
                     android:hint="@string/pcp_zip_sign_up"
                     android:autofillHints="@string/pcp_zip_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     tools:text="12345"
                     android:maxLength="5"/>
 
@@ -268,6 +316,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:hint="@string/pcp_phone_sign_up"
+                    android:layout_margin="@dimen/extra_large_padding"
+                    android:padding="@dimen/extra_large_padding"
+                    android:background="@drawable/border"
                     android:autofillHints="@string/pcp_phone_sign_up"
                     tools:text="0000000000"
                     android:maxLength="10"/>
@@ -276,10 +327,13 @@
 
             <Button
                 android:id="@+id/addAccount"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:contentDescription="@string/add_account_sign_up"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border_back"
+                android:padding="@dimen/extra_large_padding"
                 android:text="@string/add_account_sign_up"/>
 
         </LinearLayout>
