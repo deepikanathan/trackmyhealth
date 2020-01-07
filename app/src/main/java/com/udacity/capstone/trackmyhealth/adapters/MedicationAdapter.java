@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.constants.Constants;
-import com.udacity.capstone.trackmyhealth.database.AppDatabase;
-import com.udacity.capstone.trackmyhealth.database.AppExecutors;
+import com.udacity.capstone.trackmyhealth.database.AppMedicationDatabase;
 import com.udacity.capstone.trackmyhealth.database.Medication;
 import com.udacity.capstone.trackmyhealth.ui.MedicationEditActivity;
 
@@ -71,11 +69,11 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Me
     class MedicationViewHolder extends RecyclerView.ViewHolder {
         TextView name, dose, unit, frequency;
         ImageView editImage, deleteImage;
-        AppDatabase mDb;
+        AppMedicationDatabase mDb;
 
         MedicationViewHolder(@NonNull final View itemView) {
             super(itemView);
-            mDb = AppDatabase.getInstance(context);
+            mDb = AppMedicationDatabase.getInstance(context);
             name = itemView.findViewById(R.id.medication_name);
             dose = itemView.findViewById(R.id.dose);
             unit = itemView.findViewById(R.id.unit);

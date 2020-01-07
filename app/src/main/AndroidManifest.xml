@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.SignUpActivity"/>
+        <activity android:name=".ui.HealthDataActivity"/>
+        <activity android:name=".ui.HealthDataEditActivity"/>
         <activity android:name=".ui.ProfileActivity"/>
         <activity android:name=".ui.OptionsActivity"/>
         <activity android:name=".ui.MedicationEditActivity"/>

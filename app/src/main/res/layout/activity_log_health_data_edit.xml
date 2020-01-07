@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MedicationEditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_add_health_data"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:id="@+id/doc_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/physician_name"
+            android:inputType="text"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/physician_name" />
+
+        <EditText
+            android:id="@+id/date_of_visit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/date_of_visit"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/date_of_visit" />
+
+        <EditText
+            android:id="@+id/a1c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/a1c"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/a1c" />
+
+        <EditText
+            android:id="@+id/blood_sugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/blood_sugar"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/blood_sugar" />
+
+        <EditText
+            android:id="@+id/triglycerides"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/trigycerides"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/trigycerides" />
+
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/weight"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/weight" />
+
+        <EditText
+            android:id="@+id/hdl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/HDL"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/HDL" />
+
+        <EditText
+            android:id="@+id/ldl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border"
+            android:hint="@string/LDL"
+            android:inputType="date"
+            android:padding="@dimen/extra_large_padding"
+            android:autofillHints="@string/LDL" />
+
+        <Button
+            android:id="@+id/add_health_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/extra_large_padding"
+            android:background="@drawable/border_back"
+            android:padding="@dimen/extra_large_padding"
+            android:text="@string/add_health_data" />
+
+    </LinearLayout>
+</ScrollView>

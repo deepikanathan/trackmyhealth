@@ -48,7 +48,7 @@ public class OptionsActivity extends AppCompatActivity {
         journalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(OptionsActivity.this, HealthDataActivity.class);
                 startActivity(intent);
             }
         });

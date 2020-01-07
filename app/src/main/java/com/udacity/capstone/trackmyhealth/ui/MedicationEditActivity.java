@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -12,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.constants.Constants;
-import com.udacity.capstone.trackmyhealth.database.AppDatabase;
+import com.udacity.capstone.trackmyhealth.database.AppMedicationDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.Medication;
 
@@ -22,7 +21,7 @@ public class MedicationEditActivity extends AppCompatActivity {
     Button button;
     int mMedicationId;
     Intent intent;
-    private AppDatabase mDb;
+    private AppMedicationDatabase mDb;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class MedicationEditActivity extends AppCompatActivity {
 
         initViews();
 
-        mDb = AppDatabase.getInstance(getApplicationContext());
+        mDb = AppMedicationDatabase.getInstance(getApplicationContext());
         intent = getIntent();
         if (intent != null && intent.hasExtra(Constants.UPDATE_Medication_Id)) {
             button.setText(R.string.update);

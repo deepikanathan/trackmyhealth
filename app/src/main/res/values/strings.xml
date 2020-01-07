@@ -102,6 +102,21 @@
     <string name="update">Update</string>
     <string name="edit_medication">Edit Medication</string>
 
+    //  Add Health Data screen
+    <string name="title_add_health_data">Log Health Data</string>
+    <string name="physician_name">Physician Name</string>
+    <string name="date_of_visit">Date of Visit</string>
+    <string name="a1c">A1C (mg/dL)</string>
+    <string name="blood_sugar">Blood Sugar (mg/dL)</string>
+    <string name="trigycerides">Triglycerides (mg/dL)</string>
+    <string name="weight">Weight (lb)</string>
+    <string name="HDL">HDL (mg/dL)</string>
+    <string name="LDL">LDL (mg/dL)</string>
+    <string name="add_health_data">Log Data</string>
+    <string name="health_value">5.2mg/dL</string>
+    <string name="health_journal">Health Journal</string>
+
+
 
 
 </resources>
