@@ -22,13 +22,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/large_padding"
+                android:background="@color/colorPrimary">
 
                 <TextView
                     android:id="@+id/date_of_visit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="clip_horizontal|center|clip_vertical"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/extra_large_text"
                     android:textStyle="bold"
@@ -39,15 +40,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGray">
+
                 <TextView
                     android:id="@+id/a1c_key"
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/a1c"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text"
-                    android:textStyle="bold" />
+                    android:clickable="true"
+                    android:linksClickable="true"
+                    android:text="@string/a1c"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/extra_large_text" />
 
                 <TextView
                     android:id="@+id/a1c_value"
@@ -56,17 +62,21 @@
                     tools:text="@string/health_value" />
             </LinearLayout>
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/bloodsugar_key"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="@string/blood_sugar"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/extra_large_text"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGrayDark">
+
+                <TextView
+                    android:id="@+id/bloodsugar_key"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:linksClickable="true"
+                    android:text="@string/blood_sugar"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/extra_large_text" />
 
             <TextView
                 android:id="@+id/bloodsugar_value"
@@ -78,15 +88,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGray">
+
                 <TextView
                     android:id="@+id/trig_key"
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/trigycerides"
+                    android:text="@string/trigycerides"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/extra_large_text" />
 
                 <TextView
                     android:id="@+id/trig_value"
@@ -97,15 +110,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGrayDark">
+
                 <TextView
                     android:id="@+id/weight_key"
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/weight"
+                    android:text="@string/weight"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/extra_large_text" />
 
                 <TextView
                     android:id="@+id/weight_value"
@@ -116,15 +132,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGray">
+
                 <TextView
                     android:id="@+id/hdl_key"
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/HDL"
+                    android:text="@string/HDL"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/extra_large_text" />
 
                 <TextView
                     android:id="@+id/hdl_value"
@@ -135,15 +154,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:background="@color/colorGrayDark">
+
                 <TextView
                     android:id="@+id/ldl_key"
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/LDL"
+                    android:text="@string/LDL"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/extra_large_text" />
 
                 <TextView
                     android:id="@+id/ldl_value"

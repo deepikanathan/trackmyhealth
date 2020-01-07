@@ -2,6 +2,8 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,7 @@ import com.udacity.capstone.trackmyhealth.database.Medication;
 
 public class MedicationEditActivity extends AppCompatActivity {
 
-    EditText name, dose, unit, frequncy;
+    EditText name, dose, unit, frequency;
     Button button;
     int mMedicationId;
     Intent intent;
@@ -47,13 +49,33 @@ public class MedicationEditActivity extends AppCompatActivity {
                 }
             });
         }
+
+//        name.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {}
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//
+//
+//
+//                if(s.equals("."))
+//                    name.setText("");
+//            }
+//        });
     }
 
     private void initViews() {
         name = findViewById(R.id.med_name);
         dose = findViewById(R.id.med_dose);
         unit = findViewById(R.id.med_unit);
-        frequncy = findViewById(R.id.med_frequency);
+        frequency = findViewById(R.id.med_frequency);
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +90,7 @@ public class MedicationEditActivity extends AppCompatActivity {
                 name.getText().toString(),
                 dose.getText().toString(),
                 unit.getText().toString(),
-                frequncy.getText().toString());
+                frequency.getText().toString());
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
@@ -90,7 +112,7 @@ public class MedicationEditActivity extends AppCompatActivity {
         name.setText(person.getName());
         dose.setText(person.getDose());
         unit.setText(person.getUnit());
-        frequncy.setText(person.getFrequency());
+        frequency.setText(person.getFrequency());
     }
 
     @Override

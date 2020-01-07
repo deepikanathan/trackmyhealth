@@ -2,6 +2,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="365dp"
+        android:layout_gravity="fill"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg" />
+        />
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="match_parent"
@@ -11,19 +19,22 @@
         android:paddingTop="@dimen/extra_large_padding"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="@string/description_landing"
-        android:autofillHints="" />
+        android:layout_margin="@dimen/extra_large_padding"
+        android:text="@string/description_landing"/>
 
     <Button
         android:id="@+id/sign_up_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/extra_large_padding"
+        android:background="@drawable/border_back"
+        android:padding="@dimen/extra_large_padding"
         android:text="@string/signup_landing"
         android:hint="@string/add_account_sign_up"/>
 </LinearLayout>

@@ -49,10 +49,10 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     ImageView profileImageView;
     @BindView(R.id.addAccount)
     Button signUpButton;
-    @BindView(R.id.weight_unit_spinner)
-    Spinner weightSpinner;
-    @BindView(R.id.height_unit_spinner)
-    Spinner heightSpinner;
+//    @BindView(R.id.weight_unit_spinner)
+//    Spinner weightSpinner;
+//    @BindView(R.id.height_unit_spinner)
+//    Spinner heightSpinner;
     @BindView(R.id.state_sign_up_spinner)
     Spinner stateSpinner;
 //    @BindView(R.id.country_sign_up_spinner)
@@ -79,11 +79,11 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
                 .placeholder(R.drawable.user_48x48)
                 .into(profileImageView);
 
-        heightSpinner.setOnItemSelectedListener(this);
-        populateHeightUnits(heightSpinner);
-
-        weightSpinner.setOnItemSelectedListener(this);
-        populateWeightUnits(weightSpinner);
+//        heightSpinner.setOnItemSelectedListener(this);
+//        populateHeightUnits(heightSpinner);
+//
+//        weightSpinner.setOnItemSelectedListener(this);
+//        populateWeightUnits(weightSpinner);
 
         stateSpinner.setOnItemSelectedListener(this);
         populateState(stateSpinner);
@@ -177,12 +177,12 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         switch (parent.getId())
         {
-            case R.id.height_unit_spinner:
-                heightUnit = parent.getItemAtPosition(position).toString();
-                break;
-            case R.id.weight_unit_spinner:
-                weightUnit = parent.getItemAtPosition(position).toString();
-                break;
+//            case R.id.height_unit_spinner:
+//                heightUnit = parent.getItemAtPosition(position).toString();
+//                break;
+//            case R.id.weight_unit_spinner:
+//                weightUnit = parent.getItemAtPosition(position).toString();
+//                break;
             case R.id.state_sign_up_spinner:
                 state = parent.getItemAtPosition(position).toString();
                 break;

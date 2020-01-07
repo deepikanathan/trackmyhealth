@@ -15,8 +15,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.database.Medication;
+import com.udacity.capstone.trackmyhealth.widget.MedicationWidgetService;
 
 public class MainActivity extends AppCompatActivity {
+
+    Medication medication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 }
 
     @Override
@@ -40,11 +44,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
+        if (id == R.id.action_add_to_widget) {
+
+            MedicationWidgetService.updateWidget(this, medication);
+            Toast.makeText(this, String.format(getString(R.string.added_to_widget_toast), medication.getName()), Toast.LENGTH_SHORT).show();
+
+//            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+//            startActivity(intent);
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
