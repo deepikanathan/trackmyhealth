@@ -16,7 +16,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorBackground">
 
             <TextView
                 android:id="@+id/medication_name"
@@ -48,7 +49,7 @@
                     android:id="@+id/frequency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/large_padding"
+                    android:layout_marginStart="@dimen/large_padding"
                     android:text="@string/once_a_day" />
 
             </LinearLayout>

@@ -1,64 +1,95 @@
 package com.udacity.capstone.trackmyhealth.ui;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Base64;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
+import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.utils.ImageConverter;
 import com.udacity.capstone.trackmyhealth.utils.PopulateSpinner;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-
-
-    String heightUnit, weightUnit, state, country;
-    String userProfilePicture;
+    String state;
 
     @BindView (R.id.profileImageView)
     ImageView profileImageView;
-    @BindView(R.id.addAccount)
-    Button signUpButton;
-//    @BindView(R.id.weight_unit_spinner)
-//    Spinner weightSpinner;
-//    @BindView(R.id.height_unit_spinner)
-//    Spinner heightSpinner;
+    @BindView (R.id.firstNameEditText)
+    EditText firstNameEditText;
+    @BindView (R.id.lastNameTextView)
+    EditText lastNameTextView;
+    @BindView (R.id.dobEditText)
+    EditText dobEditText;
+    @BindView (R.id.emailEditText)
+    EditText emailEditText;
+//    @BindView (R.id.phoneEditText)
+//    EditText phoneEditText;
+    @BindView (R.id.iceNameEditText)
+    EditText iceNameEditText;
+    @BindView (R.id.icePhoneEditText)
+    EditText icePhoneEditText;
+    @BindView (R.id.heightEditText)
+    EditText heightEditText;
+    @BindView (R.id.weightEditText)
+    EditText weightEditText;
+    @BindView (R.id.pcpNameEditText)
+    EditText pcpNameEditText;
+    @BindView (R.id.pcpAddressEditText)
+    EditText pcpAddressEditText;
+    @BindView (R.id.pcpCityEditText)
+    EditText pcpCityEditText;
     @BindView(R.id.state_sign_up_spinner)
     Spinner stateSpinner;
-//    @BindView(R.id.country_sign_up_spinner)
-//    Spinner countrySpinner;
+    @BindView (R.id.pcpZipEditText)
+    EditText pcpZipEditText;
+    @BindView (R.id.pcpPhoneEditText)
+    EditText pcpPhoneEditText;
+
+    @BindView(R.id.addAccount)
+    Button signUpButton;
+    Tracker mTracker;
 
     private static int RESULT_LOAD_IMAGE = 1;
+    private int mYear, mMonth, mDay;
+
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,29 +98,31 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateAccount();
+                createAccount();
                 }
         });
+
+        dobEditText.setOnClickListener(this);
+        dobEditText.setShowSoftInputOnFocus(false);
+
 
         Picasso.get()
                 .load(R.drawable.user_48x48)
                 .placeholder(R.drawable.user_48x48)
                 .into(profileImageView);
 
-//        heightSpinner.setOnItemSelectedListener(this);
-//        populateHeightUnits(heightSpinner);
-//
-//        weightSpinner.setOnItemSelectedListener(this);
-//        populateWeightUnits(weightSpinner);
-
         stateSpinner.setOnItemSelectedListener(this);
         populateState(stateSpinner);
-
-//        countrySpinner.setOnItemSelectedListener(this);
-//        populateCountry(countrySpinner);
 
         Button buttonLoadImage = findViewById(R.id.importProfilePicture);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +138,131 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             }
         });
 
+        loadValues();
     }
+
+    private void loadValues() {
+
+        sharedpreferences = getSharedPreferences(Constants.mypreference, Context.MODE_PRIVATE);
+
+        //  Profile Picture
+        if (sharedpreferences.contains(getResources().getString(R.string.profile_picture))) {
+            String imgAsString = sharedpreferences.getString(getResources().getString(R.string.profile_picture), "");
+            if (!imgAsString.isEmpty()) {
+                Bitmap bmp = ImageConverter.stringToBitMap(imgAsString);
+                profileImageView.setImageBitmap(bmp);
+            }
+        }
+        if (sharedpreferences.contains(getResources().getString(R.string.first_name_sign_up))) {
+            firstNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.first_name_sign_up), ""));
+        }
+        if (sharedpreferences.contains(getResources().getString(R.string.last_name_sign_up))) {
+            lastNameTextView.setText(sharedpreferences.getString(getResources().getString(R.string.last_name_sign_up), ""));
+        }
+        //  email
+        if (sharedpreferences.contains(getResources().getString(R.string.email_sign_up))) {
+            emailEditText.setText(sharedpreferences.getString(getResources().getString(R.string.email_sign_up), ""));
+        }
+
+        //  DOB
+        if (sharedpreferences.contains(getResources().getString(R.string.dob_sign_up))) {
+            dobEditText.setText(sharedpreferences.getString(getResources().getString(R.string.dob_sign_up), ""));
+        }
+
+        //  phone number
+//        if (sharedpreferences.contains(getResources().getString(R.string.phone_number_sign_up))) {
+//            phoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.phone_number_sign_up), ""));
+//        }
+
+        //  gender
+        if (sharedpreferences.contains(getResources().getString(R.string.gender))) {
+            boolean isMale = sharedpreferences.getBoolean(getResources().getString(R.string.gender), false);
+
+            RadioButton male = findViewById(R.id.gender_male);
+            RadioButton female = findViewById(R.id.gender_female);
+            if (isMale)
+                male.setChecked(true);
+            else
+                female.setChecked(true);
+        }
+
+        //  ICE
+        if (sharedpreferences.contains(getResources().getString(R.string.ice_name_sign_up))) {
+            iceNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_name_sign_up), ""));
+        }
+
+        //  ICE Phone
+        if (sharedpreferences.contains(getResources().getString(R.string.ice_phone_number_sign_up))) {
+            icePhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_phone_number_sign_up), ""));
+        }
+
+        //  height
+        if (sharedpreferences.contains(getResources().getString(R.string.height_sign_up))) {
+            heightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.height_sign_up), ""));
+        }
+
+        //  weight
+        if (sharedpreferences.contains(getResources().getString(R.string.weight_sign_up))) {
+            weightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.weight_sign_up), ""));
+        }
+
+        //  PCP Name
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_name_sign_up))) {
+            pcpNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_name_sign_up), ""));
+        }
+
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_address_sign_up))) {
+            pcpAddressEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_address_sign_up), ""));
+        }
+
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_city_sign_up))) {
+            pcpCityEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_city_sign_up), ""));
+        }
+        //  PCP State
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_state_sign_up))) {
+            String st = sharedpreferences.getString(getResources().getString(R.string.pcp_state_sign_up), "");
+            if (!st.isEmpty()) {
+                ArrayList<String> stateList = PopulateSpinner.GetStates();
+                Collections.sort(stateList);
+                int position = stateList.indexOf(st);
+                stateSpinner.setSelection(position);
+            }
+
+        }
+        //  PCP Zip
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_zip_sign_up))) {
+            pcpZipEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
+        }
+        //  PCP Phone
+        if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
+            pcpPhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -120,34 +277,11 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
                 Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
                 ImageView imageView = findViewById(R.id.profileImageView);
                 imageView.setImageBitmap(yourSelectedImage);
-                //userProfilePicture = imageStream;
             }
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    // Creating adapter for height units spinner
-    private void populateHeightUnits(Spinner heightSpinner) {
-
-        ArrayAdapter<CharSequence> heightDataAdapter =  ArrayAdapter.createFromResource(this, R.array.height_units_array, android.R.layout.simple_spinner_item);
-        // Drop down layout style - list view with radio button
-        heightDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
-        heightSpinner.setAdapter(heightDataAdapter);
-    }
-
-    // Creating adapter for weight units spinner
-    private void populateWeightUnits(Spinner weightSpinner) {
-
-        ArrayAdapter<CharSequence> weightDataAdapter =  ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
-        // Drop down layout style - list view with radio button
-        weightDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
-        weightSpinner.setAdapter(weightDataAdapter);
     }
 
     private void populateState(Spinner stateSpinner) {
@@ -160,35 +294,14 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         stateSpinner.setAdapter(stateAdapter);
     }
 
-    private void populateCountry(Spinner countrySpinner) {
-
-        ArrayList<String> countryList = PopulateSpinner.GetCountry();
-        Collections.sort(countryList);
-
-        ArrayAdapter<String> countryDataAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countryList);
-        countryDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        countrySpinner.setAdapter(countryDataAdapter);
-    }
-
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         switch (parent.getId())
         {
-//            case R.id.height_unit_spinner:
-//                heightUnit = parent.getItemAtPosition(position).toString();
-//                break;
-//            case R.id.weight_unit_spinner:
-//                weightUnit = parent.getItemAtPosition(position).toString();
-//                break;
             case R.id.state_sign_up_spinner:
                 state = parent.getItemAtPosition(position).toString();
                 break;
-//            case R.id.country_sign_up_spinner:
-//                country = parent.getItemAtPosition(position).toString();
-//                break;
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -203,50 +316,139 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         return ImageConverter.imageToString(bitmap);
     }
 
-    public void CreateAccount() {
+    private boolean checkDataEntered()
+    {
+        boolean allClear = true;
 
-        boolean isMale = true;
-        RadioGroup gender = findViewById(R.id.genderRadioGroup);
-        int selectedId = gender.getCheckedRadioButtonId();
-        if (selectedId == R.id.gender_female) {
-            isMale = false;
+        if (isEmpty(firstNameEditText)) {
+            allClear = false;
+            firstNameEditText.requestFocus();
+            firstNameEditText.setError("FirstName is required");
+        }
+        if (isEmpty(lastNameTextView)) {
+            if (allClear) lastNameTextView.requestFocus();
+            allClear = false;
+            lastNameTextView.setError("LastName is required");
+        }
+        if (isEmpty(dobEditText)) {
+            if (allClear) dobEditText.requestFocus();
+            allClear = false;
+            dobEditText.setError("Dat of Birth is required");
+
+
+        }
+        if (isEmpty(emailEditText)) {
+            if (allClear) emailEditText.requestFocus();
+            allClear = false;
+            emailEditText.setError("Email is required");
+        }
+//        if (isEmpty(phoneEditText)) {
+//            if (allClear) phoneEditText.requestFocus();
+//            allClear = false;
+//            phoneEditText.setError("Phone is required");
+//       }
+        if (isEmpty(heightEditText)) {
+            if (allClear) heightEditText.requestFocus();
+            allClear = false;
+            heightEditText.setError("Height is required");
+        }
+        if (isEmpty(weightEditText)) {
+            if (allClear) weightEditText.requestFocus();
+            allClear = false;
+            weightEditText.setError("Weight is required");
         }
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("User",MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
+        return allClear;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mTracker.setScreenName("Landing Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+
+    }
+
+    public void createAccount() {
+
+       if (checkDataEntered()) {
+
+           boolean isMale = true;
+           RadioGroup gender = findViewById(R.id.genderRadioGroup);
+           int selectedId = gender.getCheckedRadioButtonId();
+           if (selectedId == R.id.gender_female) {
+               isMale = false;
+           }
+           SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
+           SharedPreferences.Editor editor = pref.edit();
+           editor.putString(getResources().getString(R.string.profile_picture), imageToString());
+
+           if (!firstNameEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.first_name_sign_up), firstNameEditText.getText().toString());
+           if (!lastNameTextView.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.last_name_sign_up), lastNameTextView.getText().toString());
+           if (!dobEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.dob_sign_up), dobEditText.getText().toString());
+           if (!emailEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.email_sign_up), emailEditText.getText().toString());
+//           if (!phoneEditText.getText().toString().isEmpty())
+//               editor.putString(getResources().getString(R.string.phone_number_sign_up), phoneEditText.getText().toString());
+               editor.putBoolean(getResources().getString(R.string.gender), isMale);
+           if (!iceNameEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.ice_name_sign_up), iceNameEditText.getText().toString());
+           if (!icePhoneEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.ice_phone_number_sign_up), icePhoneEditText.getText().toString());
+           if (!heightEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.height_sign_up), heightEditText.getText().toString());
+           if (!weightEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.weight_sign_up), weightEditText.getText().toString());
+
+           if (!pcpNameEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.pcp_name_sign_up), pcpNameEditText.getText().toString());
+           if (!pcpAddressEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.pcp_address_sign_up), pcpAddressEditText.getText().toString());
+           if (!pcpCityEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.pcp_city_sign_up), pcpCityEditText.getText().toString());
+           editor.putString(getResources().getString(R.string.pcp_state_sign_up), state);
+           if (!pcpZipEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.pcp_zip_sign_up), pcpZipEditText.getText().toString());
+           if (!pcpPhoneEditText.getText().toString().isEmpty())
+               editor.putString(getResources().getString(R.string.pcp_phone_sign_up), pcpPhoneEditText.getText().toString());
+
+           editor.commit();
+
+           Intent intent = new Intent(this, OptionsActivity.class);
+           startActivity(intent);
+       }
+    }
 
 
-        editor.putString(getResources().getString(R.string.profile_picture), imageToString());
+    @Override
+    public void onClick(View v) {
+        if (v == dobEditText) {
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
 
+            DatePickerDialog datePickerDialog;
+            datePickerDialog = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
 
-        if (((EditText)findViewById(R.id.firstNameEditText)).getText().toString().isEmpty()) {
-            ((EditText) findViewById(R.id.firstNameEditText)).setError("FirstName cannot be empty");
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    dobEditText.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
+                }
+            }, mYear, mMonth, mDay);
+
+            datePickerDialog.show();
         }
 
-
-
-        editor.putString(getResources().getString(R.string.first_name_sign_up), ((EditText)findViewById(R.id.firstNameEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.last_name_sign_up), ((EditText)findViewById(R.id.lastNameTextView)).getText().toString());
-        editor.putString(getResources().getString(R.string.dob_sign_up), ((EditText)findViewById(R.id.dobEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.email_sign_up), ((EditText)findViewById(R.id.emailEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.phone_number_sign_up), ((EditText)findViewById(R.id.phoneEditText)).getText().toString());
-        editor.putBoolean(getResources().getString(R.string.gender), isMale);
-        editor.putString(getResources().getString(R.string.ice_name_sign_up), ((EditText)findViewById(R.id.iceNameEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.ice_phone_number_sign_up), ((EditText)findViewById(R.id.icePhoneEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.height_sign_up), ((EditText)findViewById(R.id.heightEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.weight_sign_up), ((EditText)findViewById(R.id.weightEditText)).getText().toString());
-
-        editor.putString(getResources().getString(R.string.pcp_name_sign_up), ((EditText)findViewById(R.id.pcpNameEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.pcp_address_sign_up), ((EditText)findViewById(R.id.pcpAddressEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.pcp_city_sign_up), ((EditText)findViewById(R.id.pcpCityEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.pcp_state_sign_up), state);
-//        editor.putString(getResources().getString(R.string.pcp_country_sign_up), country);
-        editor.putString(getResources().getString(R.string.pcp_zip_sign_up), ((EditText)findViewById(R.id.pcpZipEditText)).getText().toString());
-        editor.putString(getResources().getString(R.string.pcp_phone_sign_up), ((EditText)findViewById(R.id.pcpPhoneEditText)).getText().toString());
-
-        editor.commit();
-
-        Intent intent = new Intent(this, OptionsActivity.class);
-        startActivity(intent);
     }
 }

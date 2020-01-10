@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +69,7 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
     }
 
     class HealthDataViewHolder extends RecyclerView.ViewHolder {
+        TextView docNameKey, visitDateKey, a1cKey, bloodsugarKey, triglyceridesKey, weightKey, ldlKey, hdlKey;
         TextView docName, visitDate, a1c, bloodsugar, triglycerides, weight, ldl, hdl;
         ImageView editImage;
         AppHealthDataDatabase mDb;
@@ -77,6 +79,15 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
             mDb = AppHealthDataDatabase.getInstance(context);
           //  docName = itemView.findViewById(R.id.doc_name);
             visitDate = itemView.findViewById(R.id.date_of_visit);
+
+            a1cKey = itemView.findViewById(R.id.a1c_key);
+            bloodsugarKey = itemView.findViewById(R.id.bloodsugar_key);
+            triglyceridesKey = itemView.findViewById(R.id.trig_key);
+            weightKey = itemView.findViewById(R.id.weight_key);
+            ldlKey = itemView.findViewById(R.id.ldl_key);
+            hdlKey = itemView.findViewById(R.id.hdl_key);
+
+
             a1c = itemView.findViewById(R.id.a1c_value);
             bloodsugar = itemView.findViewById(R.id.bloodsugar_value);
             triglycerides = itemView.findViewById(R.id.trig_value);
@@ -84,17 +95,14 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
             ldl = itemView.findViewById(R.id.ldl_value);
             hdl = itemView.findViewById(R.id.hdl_value);
 
-//            editImage = itemView.findViewById(R.id.edit_Image);
-//            editImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int elementId = mHealthDataList.get(getAdapterPosition()).getId();
-//                    Intent i = new Intent(context, MedicationEditActivity.class);
-//                    i.putExtra(Constants.UPDATE_Medication_Id, elementId);
-//                    context.startActivity(i);
-//                }
-//            });
-//        }
+            a1cKey.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "clicked a1c", Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 }
 }

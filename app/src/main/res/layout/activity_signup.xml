@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.SignUpActivity">
 
+    <include layout="@layout/app_toolbar"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_sign_up"
-        android:textSize="30sp"
+        android:textSize="@dimen/extra_large_text"
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
@@ -92,7 +93,6 @@
                 android:id="@+id/dobEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
@@ -111,19 +111,6 @@
                 android:hint="@string/email_sign_up"
                 android:inputType="textEmailAddress"
                 tools:text="justy@gmail.com"/>
-
-            <EditText
-                android:id="@+id/phoneEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:autofillHints="@string/phone_number_sign_up"
-                android:layout_margin="@dimen/extra_large_padding"
-                android:padding="@dimen/extra_large_padding"
-                android:background="@drawable/border"
-                android:hint="@string/phone_number_sign_up"
-                tools:text="1112223333"
-                android:maxLength="10"/>
 
             <EditText
                 android:id="@+id/iceNameEditText"
@@ -172,11 +159,6 @@
                     android:text="@string/gender_female_sign_up" />
             </RadioGroup>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-
             <EditText
                 android:id="@+id/heightEditText"
                 android:layout_width="match_parent"
@@ -189,21 +171,6 @@
                 android:background="@drawable/border"
                 tools:text="5"/>
 
-<!--            <Spinner-->
-<!--                android:id="@+id/height_unit_spinner"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_margin="@dimen/extra_large_padding"-->
-<!--                android:padding="@dimen/extra_large_padding"-->
-<!--                android:background="@drawable/border" />-->
-
-<!--        </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
 
                 <EditText
                     android:id="@+id/weightEditText"
@@ -216,17 +183,6 @@
                     android:background="@drawable/border"
                     android:hint="@string/weight_sign_up"
                     tools:text="123"/>
-<!--                <Spinner-->
-<!--                    android:id="@+id/weight_unit_spinner"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_margin="@dimen/extra_large_padding"-->
-<!--                    android:padding="@dimen/extra_large_padding"-->
-<!--                    android:background="@drawable/border"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content" />-->
-
-
-<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,15 +241,6 @@
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
                     android:spinnerMode="dialog" />
-
-<!--                <Spinner-->
-<!--                    android:id="@+id/country_sign_up_spinner"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:textSize="@dimen/large_text"-->
-<!--                    android:hint="@string/pcp_country_sign_up"-->
-<!--                    android:spinnerMode="dialog" />-->
 
                 <EditText
                     android:layout_width="match_parent"

@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/options_layout">
-
+    <include layout="@layout/app_toolbar"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

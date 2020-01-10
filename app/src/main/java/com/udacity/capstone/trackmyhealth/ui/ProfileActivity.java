@@ -14,8 +14,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
+import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.utils.ImageConverter;
 
 import butterknife.BindView;
@@ -24,7 +29,6 @@ import butterknife.ButterKnife;
 public class ProfileActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
-    public static final String mypreference = "User";
 
 
     @BindView (R.id.profilePic)
@@ -43,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView height;
     @BindView(R.id.weightValue)
     TextView weight;
+    @BindView(R.id.pcpTitle)
+    TextView pcpTitle;
     @BindView(R.id.pcpName)
     TextView pcpName;
     @BindView(R.id.pcpAddress1)
@@ -57,6 +63,10 @@ public class ProfileActivity extends AppCompatActivity {
     TextView pcpPhone;
     @BindView(R.id.mapItButton)
     ImageButton mapButton;
+    @BindView(R.id.editProfile)
+    ImageView editProfile;
+
+    Tracker mTracker;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,14 +74,15 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_userprofile);
         ButterKnife.bind(this);
 
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               showMap();
-            }
-        });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        sharedpreferences = getSharedPreferences(mypreference,
+        // Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        sharedpreferences = getSharedPreferences(Constants.mypreference,
                 Context.MODE_PRIVATE);
 
         //  Profile Picture
@@ -80,9 +91,18 @@ public class ProfileActivity extends AppCompatActivity {
             if (!imgAsString.isEmpty()) {
                 Bitmap bmp = ImageConverter.stringToBitMap(imgAsString);
                 profilePic.setImageBitmap(bmp);
-
             }
         }
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, SignUpActivity.class);
+               // i.putExtra(Constants.UPDATE_User, sharedpreferences);
+                startActivity(i);
+            }
+        });
+
 
         //  name
         setName();
@@ -135,28 +155,47 @@ public class ProfileActivity extends AppCompatActivity {
         //  PCP Address
         if (sharedpreferences.contains(getResources().getString(R.string.pcp_address_sign_up))) {
             pcpAddress.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_address_sign_up), ""));
+            //  PCP City
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_city_sign_up))) {
+                pcpCity.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_city_sign_up), ""));
+                //  PCP State
+                if (sharedpreferences.contains(getResources().getString(R.string.pcp_state_sign_up))) {
+                    pcpState.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_state_sign_up), ""));
+                    //  PCP Zip
+                    if (sharedpreferences.contains(getResources().getString(R.string.pcp_zip_sign_up))) {
+                        pcpZip.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
+                        //  PCP Phone
+                        if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
+                            pcpPhone.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
+                            pcpTitle.setVisibility(View.VISIBLE);
+                            pcpAddress.setVisibility(View.VISIBLE);
+                            pcpCity.setVisibility(View.VISIBLE);
+                            pcpState.setVisibility(View.VISIBLE);
+                            pcpZip.setVisibility(View.VISIBLE);
+                            pcpPhone.setVisibility(View.VISIBLE);
+                            mapButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
         }
 
-        //  PCP City
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_city_sign_up))) {
-            pcpCity.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_city_sign_up), ""));
-        }
 
-        //  PCP State
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_state_sign_up))) {
-            pcpState.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_state_sign_up), ""));
-        }
 
-        //  PCP Zip
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_zip_sign_up))) {
-            pcpZip.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
-        }
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMap();
+            }
+        });
+    }
 
-        //  PCP Phone
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
-            pcpPhone.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        mTracker.setScreenName("Landing Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void setName() {
@@ -188,11 +227,17 @@ public class ProfileActivity extends AppCompatActivity {
         if (!pcpZip.getText().toString().isEmpty()) {
             sb.append(pcpZip.getText().toString());
         }
-        Uri addressuri = Uri.parse("geo:0,0?q=" + sb.toString());//builder.build();
+        Uri addressuri = Uri.parse("geo:0,0?q=" + sb.toString());
         Intent intent = new Intent(Intent.ACTION_VIEW, addressuri);
         intent.setPackage("com.google.android.apps.maps");
         if (intent.resolveActivity(getPackageManager())!= null) {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

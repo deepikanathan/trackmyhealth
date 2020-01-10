@@ -11,7 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +32,20 @@ public class OptionsActivity extends AppCompatActivity {
     @BindView(R.id.settings_button)
     Button settingsButton;
 
+    Tracker mTracker;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-
         ButterKnife.bind(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,35 +87,14 @@ public class OptionsActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            Intent intent = new Intent(OptionsActivity.this, SettingsActivity.class);
-//            startActivity(intent);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mTracker.setScreenName("Landing Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }
+

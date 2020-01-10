@@ -17,7 +17,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -53,20 +54,23 @@
                     android:linksClickable="true"
                     android:text="@string/a1c"
                     android:textColor="@color/colorBlue"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/a1c_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/health_value" />
+                    tools:text="@string/health_value"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/colorBlack"
+                    />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGrayDark">
 
                 <TextView
@@ -75,22 +79,24 @@
                     android:layout_height="wrap_content"
                     android:linksClickable="true"
                     android:text="@string/blood_sugar"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/large_text" />
 
             <TextView
                 android:id="@+id/bloodsugar_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/health_value" />
+                tools:text="@string/health_value"
+                android:textSize="@dimen/large_text"
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -98,21 +104,23 @@
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:text="@string/trigycerides"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/trig_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/health_value" />
+                    tools:text="@string/health_value"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/colorBlack"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGrayDark">
 
                 <TextView
@@ -120,21 +128,23 @@
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:text="@string/weight"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/weight_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/health_value" />
+                    tools:text="@string/health_value"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/colorBlack"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGray">
 
                 <TextView
@@ -142,21 +152,23 @@
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:text="@string/HDL"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/hdl_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/health_value" />
+                    tools:text="@string/health_value"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/colorBlack"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
                 android:background="@color/colorGrayDark">
 
                 <TextView
@@ -164,14 +176,16 @@
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:text="@string/LDL"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/extra_large_text" />
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/ldl_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/health_value" />
+                    tools:text="@string/health_value"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/colorBlack" />
             </LinearLayout>
         </LinearLayout>
 

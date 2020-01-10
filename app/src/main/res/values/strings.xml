@@ -56,6 +56,7 @@
     <string name="profile_pcp_title">PCP Information</string>
     <string name="profile_pcp_address">Address</string>
     <string name="map_it_button">Directions</string>
+    <string name="edit_profile">Edit Profile</string>
 
     //  Medication DB
     <string name="medication_database">medication_db</string>

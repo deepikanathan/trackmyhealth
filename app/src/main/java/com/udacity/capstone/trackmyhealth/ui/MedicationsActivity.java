@@ -2,18 +2,25 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.adapters.MedicationAdapter;
+import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
 import com.udacity.capstone.trackmyhealth.database.AppMedicationDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.Medication;
@@ -32,6 +39,7 @@ public class MedicationsActivity extends AppCompatActivity {
 
     private MedicationAdapter mAdapter;
     private AppMedicationDatabase mDb;
+    Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +48,20 @@ public class MedicationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_list);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MedicationsActivity.this, MedicationEditActivity.class));
             }
         });
-       // mRecyclerView = findViewById(R.id.recyclerView);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Initialize the adapter and attach it to the RecyclerView
@@ -78,11 +93,13 @@ public class MedicationsActivity extends AppCompatActivity {
         retrieveTasks();
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        retrieveTasks();
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mTracker.setScreenName("Landing Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 
     private void retrieveTasks() {
 
@@ -92,5 +109,37 @@ public class MedicationsActivity extends AppCompatActivity {
                 mAdapter.setTasks(medications);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_add_to_widget) {
+
+//            MedicationWidgetService.updateWidget(this, medication);
+//            Toast.makeText(this, String.format(getString(R.string.added_to_widget_toast), medication.getName()), Toast.LENGTH_SHORT).show();
+
+//            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+//            startActivity(intent);
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

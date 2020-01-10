@@ -3,17 +3,23 @@ package com.udacity.capstone.trackmyhealth.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.adapters.HealthDataAdapter;
+import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
 import com.udacity.capstone.trackmyhealth.database.AppHealthDataDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.HealthData;
@@ -23,7 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HealthDataActivity extends AppCompatActivity {
+public class HealthDataActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.healthDataRecyclerView)
     RecyclerView healthDataRecyclerView;
@@ -32,6 +38,7 @@ public class HealthDataActivity extends AppCompatActivity {
 
     private HealthDataAdapter mAdapter;
     private AppHealthDataDatabase mDb;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +47,22 @@ public class HealthDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_health_data_list);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
+
         addHealthDataFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HealthDataActivity.this, HealthDataEditActivity.class));
             }
         });
+
 
         healthDataRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Initialize the adapter and attach it to the RecyclerView
@@ -76,11 +93,20 @@ public class HealthDataActivity extends AppCompatActivity {
         }).attachToRecyclerView(healthDataRecyclerView);
         retrieveTasks();
     }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        retrieveTasks();
-//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mTracker.setScreenName("Landing Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     private void retrieveTasks() {
         mDb.healthDataDao().getAllHealthData().observe(this, new Observer<List<HealthData>>() {
@@ -91,4 +117,9 @@ public class HealthDataActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View v) {
+
+        Toast.makeText(this, "clicked", Toast.LENGTH_LONG);
     }
+}
