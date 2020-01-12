@@ -2,6 +2,7 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +25,16 @@ import com.udacity.capstone.trackmyhealth.database.AppHealthDataDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.HealthData;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HealthDataActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static String TAG = "HealthDataActivity";
 
     @BindView(R.id.healthDataRecyclerView)
     RecyclerView healthDataRecyclerView;
@@ -47,6 +52,8 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_log_health_data_list);
         ButterKnife.bind(this);
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,6 +66,7 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
         addHealthDataFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Crashlytics.log(Log.VERBOSE, TAG, "Add Health Data Button pressed");
                 startActivity(new Intent(HealthDataActivity.this, HealthDataEditActivity.class));
             }
         });
@@ -83,23 +91,24 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
                     public void run() {
-                        int position = viewHolder.getAdapterPosition();
-                        List<HealthData> tasks = mAdapter.getTasks();
-                        mDb.healthDataDao().delete(tasks.get(position));
+                        try{
+                            int position = viewHolder.getAdapterPosition();
+                            List<HealthData> tasks = mAdapter.getTasks();
+                            mDb.healthDataDao().delete(tasks.get(position));
 
+                            Crashlytics.log(Log.VERBOSE, TAG, "Delete Health Data");
+                            Crashlytics.setInt("Health Data Position", position);
+                        }
+                        catch (Exception ex) {
+                            Crashlytics.logException(new Exception(TAG + " : Exception when deleting Health Data"));
+                        }
                     }
                 });
             }
         }).attachToRecyclerView(healthDataRecyclerView);
         retrieveTasks();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mTracker.setScreenName("Landing Activity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
     @Override
@@ -119,7 +128,6 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-
         Toast.makeText(this, "clicked", Toast.LENGTH_LONG);
     }
 }

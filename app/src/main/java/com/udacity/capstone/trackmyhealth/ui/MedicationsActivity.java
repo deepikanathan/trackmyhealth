@@ -2,6 +2,7 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.analytics.HitBuilders;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.udacity.capstone.trackmyhealth.R;
@@ -31,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MedicationsActivity extends AppCompatActivity {
+
+    private static String TAG = "MedicationsActivity";
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -48,6 +51,8 @@ public class MedicationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_list);
         ButterKnife.bind(this);
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,6 +64,7 @@ public class MedicationsActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Crashlytics.log(Log.VERBOSE, TAG, "Edit button pressed");
                 startActivity(new Intent(MedicationsActivity.this, MedicationEditActivity.class));
             }
         });
@@ -85,24 +91,17 @@ public class MedicationsActivity extends AppCompatActivity {
                         int position = viewHolder.getAdapterPosition();
                         List<Medication> tasks = mAdapter.getTasks();
                         mDb.medicationDao().delete(tasks.get(position));
-
+                        Crashlytics.log(Log.VERBOSE, TAG, "Delete medication in position : " + position);
                     }
                 });
             }
         }).attachToRecyclerView(mRecyclerView);
         retrieveTasks();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mTracker.setScreenName("Landing Activity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
     }
 
     private void retrieveTasks() {
-
         mDb.medicationDao().getAllMedications().observe(this, new Observer<List<Medication>>() {
             @Override
             public void onChanged(@Nullable List<Medication> medications) {
@@ -113,7 +112,6 @@ public class MedicationsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
@@ -121,7 +119,6 @@ public class MedicationsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         if (id == R.id.action_add_to_widget) {
 

@@ -2,12 +2,14 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.database.AppHealthDataDatabase;
@@ -16,6 +18,7 @@ import com.udacity.capstone.trackmyhealth.database.HealthData;
 
 public class HealthDataEditActivity extends AppCompatActivity {
 
+    private static String TAG = "HealthDataEditActivity";
     EditText docName, visitDate, a1c, bloodsugar, triglycerides, weight, ldl, hdl;
     Button button;
     int mHealthDataId;
@@ -28,6 +31,8 @@ public class HealthDataEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_health_data_edit);
         initViews();
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         mDb = AppHealthDataDatabase.getInstance(getApplicationContext());
         intent = getIntent();
         if (intent != null && intent.hasExtra(Constants.UPDATE_Health_Data_Id)) {
@@ -39,9 +44,11 @@ public class HealthDataEditActivity extends AppCompatActivity {
                 public void run() {
                     HealthData healthData = mDb.healthDataDao().loadHealthDataById(mHealthDataId);
                     populateUI(healthData);
+                    Crashlytics.log(Log.VERBOSE, TAG, "HealthDataEditActivity PopulateUI");
                 }
             });
         }
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
     private void initViews() {
@@ -78,24 +85,39 @@ public class HealthDataEditActivity extends AppCompatActivity {
     }
 
     public void onSaveButtonClicked() {
-        final HealthData data = new HealthData(
-                docName.getText().toString(),
-                visitDate.getText().toString(),
-                a1c.getText().toString(),
-                bloodsugar.getText().toString(),
-                triglycerides.getText().toString(),
-                weight.getText().toString(),
-                ldl.getText().toString(),
-                hdl.getText().toString());
 
-        AppExecutors.getInstance().diskIO().execute(() -> {
-            if (!intent.hasExtra(Constants.UPDATE_Health_Data_Id)) {
-                mDb.healthDataDao().insert(data);
-            } else {
-                data.setId(mHealthDataId);
-                mDb.healthDataDao().update(data);
-            }
-            finish();
-        });
+        try {
+            Crashlytics.log(Log.VERBOSE, TAG, "HealthDataEditActivity Save button clicked ");
+            Crashlytics.setString("Doc Name", docName.getText().toString());
+            Crashlytics.setString("Visit Date", visitDate.getText().toString());
+            Crashlytics.setString("A1c", a1c.getText().toString());
+            Crashlytics.setString("BloodSugar", bloodsugar.getText().toString());
+            Crashlytics.setString("Triglycerides", triglycerides.getText().toString());
+            Crashlytics.setString("Weight", weight.getText().toString());
+            Crashlytics.setString("LDL", ldl.getText().toString());
+            Crashlytics.setString("HDL", hdl.getText().toString());
+            final HealthData data = new HealthData(
+                    docName.getText().toString(),
+                    visitDate.getText().toString(),
+                    a1c.getText().toString(),
+                    bloodsugar.getText().toString(),
+                    triglycerides.getText().toString(),
+                    weight.getText().toString(),
+                    ldl.getText().toString(),
+                    hdl.getText().toString());
+
+            AppExecutors.getInstance().diskIO().execute(() -> {
+                if (!intent.hasExtra(Constants.UPDATE_Health_Data_Id)) {
+                    mDb.healthDataDao().insert(data);
+                } else {
+                    data.setId(mHealthDataId);
+                    mDb.healthDataDao().update(data);
+                }
+                finish();
+            });
+        }
+        catch (Exception ex) {
+            Crashlytics.logException(new Exception(TAG + " : Exception when saving Health Data"));
+        }
     }
 }

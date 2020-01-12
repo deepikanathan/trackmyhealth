@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.udacity.capstone.trackmyhealth.R;
@@ -28,8 +30,9 @@ import butterknife.ButterKnife;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    SharedPreferences sharedpreferences;
+    private static String TAG = "ProfileActivity";
 
+    SharedPreferences sharedpreferences;
 
     @BindView (R.id.profilePic)
     ImageView profilePic;
@@ -74,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_userprofile);
         ButterKnife.bind(this);
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -98,11 +103,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, SignUpActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Edit Profile button pressed");
                // i.putExtra(Constants.UPDATE_User, sharedpreferences);
                 startActivity(i);
             }
         });
-
 
         //  name
         setName();
@@ -124,7 +129,6 @@ public class ProfileActivity extends AppCompatActivity {
                 gender.setText("Male");
             else
                 gender.setText("Female");
-
         }
 
         //  ICE
@@ -180,22 +184,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-
-
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showMap();
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mTracker.setScreenName("Landing Activity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
     private void setName() {
@@ -214,25 +209,31 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void showMap() {
 
-        StringBuilder sb = new StringBuilder();
-        if (!pcpAddress.getText().toString().isEmpty()) {
-            sb.append(pcpAddress.getText().toString()).append(", ");
+        try {
+            StringBuilder sb = new StringBuilder();
+            if (!pcpAddress.getText().toString().isEmpty()) {
+                sb.append(pcpAddress.getText().toString()).append(", ");
+            }
+            if (!pcpCity.getText().toString().isEmpty()) {
+                sb.append(pcpCity.getText().toString()).append(", ");
+            }
+            if (!pcpState.getText().toString().isEmpty()) {
+                sb.append(pcpState.getText().toString()).append(",");
+            }
+            if (!pcpZip.getText().toString().isEmpty()) {
+                sb.append(pcpZip.getText().toString());
+            }
+            Uri addressuri = Uri.parse("geo:0,0?q=" + sb.toString());
+            Intent intent = new Intent(Intent.ACTION_VIEW, addressuri);
+            intent.setPackage("com.google.android.apps.maps");
+            if (intent.resolveActivity(getPackageManager())!= null) {
+                startActivity(intent);
+            }
         }
-        if (!pcpCity.getText().toString().isEmpty()) {
-            sb.append(pcpCity.getText().toString()).append(", ");
+        catch(Exception ex) {
+            Crashlytics.logException(new Exception("Exception when showing Map"));
         }
-        if (!pcpState.getText().toString().isEmpty()) {
-            sb.append(pcpState.getText().toString()).append(",");
-        }
-        if (!pcpZip.getText().toString().isEmpty()) {
-            sb.append(pcpZip.getText().toString());
-        }
-        Uri addressuri = Uri.parse("geo:0,0?q=" + sb.toString());
-        Intent intent = new Intent(Intent.ACTION_VIEW, addressuri);
-        intent.setPackage("com.google.android.apps.maps");
-        if (intent.resolveActivity(getPackageManager())!= null) {
-            startActivity(intent);
-        }
+
     }
 
     @Override

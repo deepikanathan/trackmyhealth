@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -11,16 +12,30 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.database.AppMedicationDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.Medication;
 
+import butterknife.BindView;
+
 public class MedicationEditActivity extends AppCompatActivity {
 
-    EditText name, dose, unit, frequency;
+    private static String TAG = "MedicationEditActivity";
+
+    @BindView(R.id.med_name)
+    EditText name;
+    @BindView(R.id.med_dose)
+    EditText dose;
+    @BindView(R.id.med_unit)
+    EditText unit;
+    @BindView(R.id.med_frequency)
+    EditText frequency;
+    @BindView(R.id.button)
     Button button;
+
     int mMedicationId;
     Intent intent;
     private AppMedicationDatabase mDb;
@@ -29,6 +44,9 @@ public class MedicationEditActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication_edit);
+
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getWindow().setSoftInputMode(
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -44,31 +62,13 @@ public class MedicationEditActivity extends AppCompatActivity {
             AppExecutors.getInstance().diskIO().execute(new Runnable() {
                 @Override
                 public void run() {
-                    Medication person = mDb.medicationDao().loadMedicationById(mMedicationId);
-                    populateUI(person);
+                    Medication medication = mDb.medicationDao().loadMedicationById(mMedicationId);
+                    Crashlytics.log(Log.VERBOSE, TAG, "Editing Medication : " + medication.getName());
+                    populateUI(medication);
                 }
             });
         }
-
-//        name.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {}
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//
-//
-//
-//                if(s.equals("."))
-//                    name.setText("");
-//            }
-//        });
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
     private void initViews() {
@@ -86,7 +86,7 @@ public class MedicationEditActivity extends AppCompatActivity {
     }
 
     public void onSaveButtonClicked() {
-        final Medication medi = new Medication(
+        final Medication medication = new Medication(
                 name.getText().toString(),
                 dose.getText().toString(),
                 unit.getText().toString(),
@@ -94,12 +94,12 @@ public class MedicationEditActivity extends AppCompatActivity {
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
-                mDb.medicationDao().insert(medi);
-                int i = mDb.medicationDao().getCount();
+                mDb.medicationDao().insert(medication);
             } else {
-                medi.setId(mMedicationId);
-                mDb.medicationDao().update(medi);
+                medication.setId(mMedicationId);
+                mDb.medicationDao().update(medication);
             }
+            Crashlytics.log(Log.VERBOSE, TAG, "Saving Medication : " + medication.getName());
             finish();
         });
     }
@@ -108,7 +108,6 @@ public class MedicationEditActivity extends AppCompatActivity {
         if (person == null) {
             return;
         }
-
         name.setText(person.getName());
         dose.setText(person.getDose());
         unit.setText(person.getUnit());

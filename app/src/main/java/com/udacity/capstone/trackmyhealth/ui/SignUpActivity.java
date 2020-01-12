@@ -10,7 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,12 +21,12 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
@@ -47,6 +47,8 @@ import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
+    private static String TAG = "SignUpActivity";
+
     String state;
 
     @BindView (R.id.profileImageView)
@@ -59,8 +61,6 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     EditText dobEditText;
     @BindView (R.id.emailEditText)
     EditText emailEditText;
-//    @BindView (R.id.phoneEditText)
-//    EditText phoneEditText;
     @BindView (R.id.iceNameEditText)
     EditText iceNameEditText;
     @BindView (R.id.icePhoneEditText)
@@ -98,6 +98,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -109,7 +111,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 createAccount();
-                }
+                Crashlytics.log(Log.VERBOSE, TAG, "SignUp button pressed");
+            }
         });
 
         dobEditText.setOnClickListener(this);
@@ -139,103 +142,105 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         });
 
         loadValues();
+
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
     private void loadValues() {
 
-        sharedpreferences = getSharedPreferences(Constants.mypreference, Context.MODE_PRIVATE);
+        try {
+            sharedpreferences = getSharedPreferences(Constants.mypreference, Context.MODE_PRIVATE);
 
-        //  Profile Picture
-        if (sharedpreferences.contains(getResources().getString(R.string.profile_picture))) {
-            String imgAsString = sharedpreferences.getString(getResources().getString(R.string.profile_picture), "");
-            if (!imgAsString.isEmpty()) {
-                Bitmap bmp = ImageConverter.stringToBitMap(imgAsString);
-                profileImageView.setImageBitmap(bmp);
+            //  Profile Picture
+            if (sharedpreferences.contains(getResources().getString(R.string.profile_picture))) {
+                String imgAsString = sharedpreferences.getString(getResources().getString(R.string.profile_picture), "");
+                if (!imgAsString.isEmpty()) {
+                    Bitmap bmp = ImageConverter.stringToBitMap(imgAsString);
+                    profileImageView.setImageBitmap(bmp);
+                }
             }
-        }
-        if (sharedpreferences.contains(getResources().getString(R.string.first_name_sign_up))) {
-            firstNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.first_name_sign_up), ""));
-        }
-        if (sharedpreferences.contains(getResources().getString(R.string.last_name_sign_up))) {
-            lastNameTextView.setText(sharedpreferences.getString(getResources().getString(R.string.last_name_sign_up), ""));
-        }
-        //  email
-        if (sharedpreferences.contains(getResources().getString(R.string.email_sign_up))) {
-            emailEditText.setText(sharedpreferences.getString(getResources().getString(R.string.email_sign_up), ""));
-        }
-
-        //  DOB
-        if (sharedpreferences.contains(getResources().getString(R.string.dob_sign_up))) {
-            dobEditText.setText(sharedpreferences.getString(getResources().getString(R.string.dob_sign_up), ""));
-        }
-
-        //  phone number
-//        if (sharedpreferences.contains(getResources().getString(R.string.phone_number_sign_up))) {
-//            phoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.phone_number_sign_up), ""));
-//        }
-
-        //  gender
-        if (sharedpreferences.contains(getResources().getString(R.string.gender))) {
-            boolean isMale = sharedpreferences.getBoolean(getResources().getString(R.string.gender), false);
-
-            RadioButton male = findViewById(R.id.gender_male);
-            RadioButton female = findViewById(R.id.gender_female);
-            if (isMale)
-                male.setChecked(true);
-            else
-                female.setChecked(true);
-        }
-
-        //  ICE
-        if (sharedpreferences.contains(getResources().getString(R.string.ice_name_sign_up))) {
-            iceNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_name_sign_up), ""));
-        }
-
-        //  ICE Phone
-        if (sharedpreferences.contains(getResources().getString(R.string.ice_phone_number_sign_up))) {
-            icePhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_phone_number_sign_up), ""));
-        }
-
-        //  height
-        if (sharedpreferences.contains(getResources().getString(R.string.height_sign_up))) {
-            heightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.height_sign_up), ""));
-        }
-
-        //  weight
-        if (sharedpreferences.contains(getResources().getString(R.string.weight_sign_up))) {
-            weightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.weight_sign_up), ""));
-        }
-
-        //  PCP Name
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_name_sign_up))) {
-            pcpNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_name_sign_up), ""));
-        }
-
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_address_sign_up))) {
-            pcpAddressEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_address_sign_up), ""));
-        }
-
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_city_sign_up))) {
-            pcpCityEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_city_sign_up), ""));
-        }
-        //  PCP State
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_state_sign_up))) {
-            String st = sharedpreferences.getString(getResources().getString(R.string.pcp_state_sign_up), "");
-            if (!st.isEmpty()) {
-                ArrayList<String> stateList = PopulateSpinner.GetStates();
-                Collections.sort(stateList);
-                int position = stateList.indexOf(st);
-                stateSpinner.setSelection(position);
+            if (sharedpreferences.contains(getResources().getString(R.string.first_name_sign_up))) {
+                firstNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.first_name_sign_up), ""));
+            }
+            if (sharedpreferences.contains(getResources().getString(R.string.last_name_sign_up))) {
+                lastNameTextView.setText(sharedpreferences.getString(getResources().getString(R.string.last_name_sign_up), ""));
+            }
+            //  email
+            if (sharedpreferences.contains(getResources().getString(R.string.email_sign_up))) {
+                emailEditText.setText(sharedpreferences.getString(getResources().getString(R.string.email_sign_up), ""));
             }
 
+            //  DOB
+            if (sharedpreferences.contains(getResources().getString(R.string.dob_sign_up))) {
+                dobEditText.setText(sharedpreferences.getString(getResources().getString(R.string.dob_sign_up), ""));
+            }
+
+            //  gender
+            if (sharedpreferences.contains(getResources().getString(R.string.gender))) {
+                boolean isMale = sharedpreferences.getBoolean(getResources().getString(R.string.gender), false);
+
+                RadioButton male = findViewById(R.id.gender_male);
+                RadioButton female = findViewById(R.id.gender_female);
+                if (isMale)
+                    male.setChecked(true);
+                else
+                    female.setChecked(true);
+            }
+
+            //  ICE
+            if (sharedpreferences.contains(getResources().getString(R.string.ice_name_sign_up))) {
+                iceNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_name_sign_up), ""));
+            }
+
+            //  ICE Phone
+            if (sharedpreferences.contains(getResources().getString(R.string.ice_phone_number_sign_up))) {
+                icePhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.ice_phone_number_sign_up), ""));
+            }
+
+            //  height
+            if (sharedpreferences.contains(getResources().getString(R.string.height_sign_up))) {
+                heightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.height_sign_up), ""));
+            }
+
+            //  weight
+            if (sharedpreferences.contains(getResources().getString(R.string.weight_sign_up))) {
+                weightEditText.setText(sharedpreferences.getString(getResources().getString(R.string.weight_sign_up), ""));
+            }
+
+            //  PCP Name
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_name_sign_up))) {
+                pcpNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_name_sign_up), ""));
+            }
+
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_address_sign_up))) {
+                pcpAddressEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_address_sign_up), ""));
+            }
+
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_city_sign_up))) {
+                pcpCityEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_city_sign_up), ""));
+            }
+            //  PCP State
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_state_sign_up))) {
+                String st = sharedpreferences.getString(getResources().getString(R.string.pcp_state_sign_up), "");
+                if (!st.isEmpty()) {
+                    ArrayList<String> stateList = PopulateSpinner.GetStates();
+                    Collections.sort(stateList);
+                    int position = stateList.indexOf(st);
+                    stateSpinner.setSelection(position);
+                }
+
+            }
+            //  PCP Zip
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_zip_sign_up))) {
+                pcpZipEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
+            }
+            //  PCP Phone
+            if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
+                pcpPhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
+            }
         }
-        //  PCP Zip
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_zip_sign_up))) {
-            pcpZipEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
-        }
-        //  PCP Phone
-        if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
-            pcpPhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
+        catch (Exception ex) {
+            Crashlytics.logException(new Exception("Exception when loading SignUp screen values"));
         }
     }
 

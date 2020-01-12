@@ -2,6 +2,7 @@ package com.udacity.capstone.trackmyhealth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.udacity.capstone.trackmyhealth.R;
@@ -20,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OptionsActivity extends AppCompatActivity {
+
+    private static String TAG = "OptionsActivity";
 
     @BindView(R.id.profile_button)
     Button profileButton;
@@ -40,6 +44,8 @@ public class OptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_options);
         ButterKnife.bind(this);
 
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,6 +57,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Profile Button pressed");
                 startActivity(intent);
             }
         });
@@ -59,6 +66,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionsActivity.this, HealthDataActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Journal Button pressed");
                 startActivity(intent);
             }
         });
@@ -67,6 +75,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionsActivity.this, MedicationsActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Medications Button pressed");
                 startActivity(intent);
             }
         });
@@ -75,6 +84,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Doctors Visit Button pressed");
                 startActivity(intent);
             }
         });
@@ -83,18 +93,11 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OptionsActivity.this, SettingsActivity.class);
+                Crashlytics.log(Log.VERBOSE, TAG, "Settings Button pressed");
                 startActivity(intent);
             }
         });
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mTracker.setScreenName("Landing Activity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 }
 
