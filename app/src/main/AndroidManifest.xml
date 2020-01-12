@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.GraphActivity"/>
         <activity android:name=".ui.SignUpActivity"/>
         <activity android:name=".ui.HealthDataActivity"/>
         <activity android:name=".ui.HealthDataEditActivity"/>
@@ -37,7 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity"/>
         </activity>
-        <receiver android:name=".widget.MedicationWidgetProvider">
+        <receiver android:name=".widget.HealthDataWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -47,7 +48,7 @@
                 android:resource="@xml/app_widget_info" />
         </receiver>
         <service
-            android:name=".widget.MedicationWidgetService"
+            android:name=".widget.HealthDataWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <meta-data
             android:name="preloaded_fonts"

@@ -3,14 +3,17 @@ package com.udacity.capstone.trackmyhealth.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
 import com.udacity.capstone.trackmyhealth.R;
@@ -47,6 +50,10 @@ public class MedicationEditActivity extends AppCompatActivity {
 
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate");
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getWindow().setSoftInputMode(
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -71,6 +78,12 @@ public class MedicationEditActivity extends AppCompatActivity {
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void initViews() {
         name = findViewById(R.id.med_name);
         dose = findViewById(R.id.med_dose);
@@ -85,23 +98,58 @@ public class MedicationEditActivity extends AppCompatActivity {
         });
     }
 
-    public void onSaveButtonClicked() {
-        final Medication medication = new Medication(
-                name.getText().toString(),
-                dose.getText().toString(),
-                unit.getText().toString(),
-                frequency.getText().toString());
+    private boolean checkDataEntered() {
+        boolean allClear = true;
 
-        AppExecutors.getInstance().diskIO().execute(() -> {
-            if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
-                mDb.medicationDao().insert(medication);
-            } else {
-                medication.setId(mMedicationId);
-                mDb.medicationDao().update(medication);
-            }
-            Crashlytics.log(Log.VERBOSE, TAG, "Saving Medication : " + medication.getName());
-            finish();
-        });
+        if (isEmpty(name)) {
+            allClear = false;
+            name.requestFocus();
+            name.setError("Medication Name is required");
+        }
+        if (isEmpty(dose)) {
+            allClear = false;
+            dose.requestFocus();
+            dose.setError("Medication Dose is required");
+        }
+        if (isEmpty(unit)) {
+            allClear = false;
+            unit.requestFocus();
+            unit.setError("Medication Unit is required");
+        }
+        if (isEmpty(frequency)) {
+            allClear = false;
+            frequency.requestFocus();
+            frequency.setError("Medication Frequency is required");
+        }
+
+        return allClear;
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    public void onSaveButtonClicked() {
+
+        if (checkDataEntered()) {
+            final Medication medication = new Medication(
+                    name.getText().toString(),
+                    dose.getText().toString(),
+                    unit.getText().toString(),
+                    frequency.getText().toString());
+
+            AppExecutors.getInstance().diskIO().execute(() -> {
+                if (!intent.hasExtra(Constants.UPDATE_Medication_Id)) {
+                    mDb.medicationDao().insert(medication);
+                } else {
+                    medication.setId(mMedicationId);
+                    mDb.medicationDao().update(medication);
+                }
+                Crashlytics.log(Log.VERBOSE, TAG, "Saving Medication : " + medication.getName());
+                finish();
+            });
+        }
     }
 
     private void populateUI(Medication person) {

@@ -3,8 +3,6 @@ package com.udacity.capstone.trackmyhealth.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
@@ -31,10 +28,6 @@ public class OptionsActivity extends AppCompatActivity {
     Button journalButton;
     @BindView(R.id.medications_button)
     Button medicationsButton;
-    @BindView(R.id.doctor_visit_button)
-    Button doctorsVisitButton;
-    @BindView(R.id.settings_button)
-    Button settingsButton;
 
     Tracker mTracker;
 
@@ -80,23 +73,6 @@ public class OptionsActivity extends AppCompatActivity {
             }
         });
 
-        doctorsVisitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Doctors Visit Button pressed");
-                startActivity(intent);
-            }
-        });
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, SettingsActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Settings Button pressed");
-                startActivity(intent);
-            }
-        });
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 }

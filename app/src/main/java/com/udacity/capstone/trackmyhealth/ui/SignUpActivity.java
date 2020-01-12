@@ -244,31 +244,6 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -347,11 +322,6 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             allClear = false;
             emailEditText.setError("Email is required");
         }
-//        if (isEmpty(phoneEditText)) {
-//            if (allClear) phoneEditText.requestFocus();
-//            allClear = false;
-//            phoneEditText.setError("Phone is required");
-//       }
         if (isEmpty(heightEditText)) {
             if (allClear) heightEditText.requestFocus();
             allClear = false;
@@ -377,7 +347,6 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     boolean isEmpty(EditText text) {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
-
     }
 
     public void createAccount() {

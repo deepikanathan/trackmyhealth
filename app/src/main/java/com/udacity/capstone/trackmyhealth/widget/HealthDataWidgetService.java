@@ -6,18 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViewsService;
 
-import com.udacity.capstone.trackmyhealth.database.Medication;
+import com.udacity.capstone.trackmyhealth.database.HealthData;
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
 
 
-public class MedicationWidgetService extends RemoteViewsService {
+public class HealthDataWidgetService extends RemoteViewsService {
 
-    public static void updateWidget(Context context, Medication medication) {
-        Prefs.AddRecipeToPreference(context, medication);
+    public static void updateWidget(Context context, HealthData healthData) {
+        Prefs.AddRecipeToPreference(context, healthData);
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, MedicationWidgetProvider.class));
-        MedicationWidgetProvider.updateMedicationWidgets(context, appWidgetManager, appWidgetIds);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, HealthDataWidgetProvider.class));
+        HealthDataWidgetProvider.updateHealthDataWidgets(context, appWidgetManager, appWidgetIds);
     }
 
     @Override

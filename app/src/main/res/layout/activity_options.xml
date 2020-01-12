@@ -49,27 +49,27 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:background="@drawable/border_back"
                 />
 
-            <Button
-                android:id="@+id/doctor_visit_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/extra_large_padding"
-                android:layout_margin="@dimen/extra_large_padding"
-                android:text="@string/doc_visit_screen"
-                android:textSize="@dimen/extra_large_text"
-                android:background="@drawable/border_back"
-                />
+<!--            <Button-->
+<!--                android:id="@+id/doctor_visit_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/extra_large_padding"-->
+<!--                android:layout_margin="@dimen/extra_large_padding"-->
+<!--                android:text="@string/doc_visit_screen"-->
+<!--                android:textSize="@dimen/extra_large_text"-->
+<!--                android:background="@drawable/border_back"-->
+<!--                />-->
 
-            <Button
-                android:id="@+id/settings_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/extra_large_padding"
-                android:layout_margin="@dimen/extra_large_padding"
-                android:text="@string/settings_screen"
-                android:textSize="@dimen/extra_large_text"
-                android:background="@drawable/border_back"
-                />
+<!--            <Button-->
+<!--                android:id="@+id/settings_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/extra_large_padding"-->
+<!--                android:layout_margin="@dimen/extra_large_padding"-->
+<!--                android:text="@string/settings_screen"-->
+<!--                android:textSize="@dimen/extra_large_text"-->
+<!--                android:background="@drawable/border_back"-->
+<!--                />-->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

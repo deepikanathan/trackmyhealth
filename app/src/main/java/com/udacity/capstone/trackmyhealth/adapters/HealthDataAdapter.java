@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.database.AppHealthDataDatabase;
 import com.udacity.capstone.trackmyhealth.database.HealthData;
+import com.udacity.capstone.trackmyhealth.ui.GraphActivity;
 
 import java.util.List;
 
@@ -101,6 +102,9 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, "clicked a1c", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, GraphActivity.class);
+                    context.startActivity(intent);
                 }
             });
     }

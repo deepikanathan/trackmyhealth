@@ -1,76 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MedicationEditActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <include layout="@layout/app_toolbar"/>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".ui.MedicationEditActivity">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_add_medication"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/med_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
-            android:background="@drawable/border"
-            android:hint="@string/med_name"
-            android:inputType="text"
-            android:padding="@dimen/extra_large_padding"
-            android:autofillHints="@string/med_name" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/med_dose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
-            android:background="@drawable/border"
-            android:hint="@string/med_dose"
-            android:inputType="number"
-            android:padding="@dimen/extra_large_padding"
-            android:autofillHints="@string/med_dose" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_add_medication"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
 
-        <EditText
-            android:id="@+id/med_unit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
-            android:background="@drawable/border"
-            android:hint="@string/med_unit"
-            android:inputType="text"
-            android:padding="@dimen/extra_large_padding"
-            android:autofillHints="@string/med_unit" />
+            <AutoCompleteTextView
+                android:id="@+id/med_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border"
+                android:hint="@string/med_name"
+                android:inputType="text"
+                android:padding="@dimen/extra_large_padding"
+                android:autofillHints="@string/med_name" />
 
-        <EditText
-            android:id="@+id/med_frequency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
-            android:background="@drawable/border"
-            android:hint="@string/med_frequency"
-            android:inputType="text"
-            android:padding="@dimen/extra_large_padding"
-            android:autofillHints="@string/med_frequency" />
+            <EditText
+                android:id="@+id/med_dose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border"
+                android:hint="@string/med_dose"
+                android:inputType="number"
+                android:padding="@dimen/extra_large_padding"
+                android:autofillHints="@string/med_dose" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/extra_large_padding"
-            android:background="@drawable/border_back"
-            android:padding="@dimen/extra_large_padding"
-            android:text="@string/med_add" />
-    </LinearLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/med_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border"
+                android:hint="@string/med_unit"
+                android:inputType="text"
+                android:padding="@dimen/extra_large_padding"
+                android:autofillHints="@string/med_unit" />
+
+            <EditText
+                android:id="@+id/med_frequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border"
+                android:hint="@string/med_frequency"
+                android:inputType="text"
+                android:padding="@dimen/extra_large_padding"
+                android:autofillHints="@string/med_frequency" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/extra_large_padding"
+                android:background="@drawable/border_back"
+                android:padding="@dimen/extra_large_padding"
+                android:text="@string/med_add" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

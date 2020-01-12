@@ -3,8 +3,8 @@
 
     //  widget
     <string name="add_to_widget">Add to Widget</string>
-    <string name="medication_pref_key">WIDGET_MEDICATION_KEY</string>
-    <string name="medication_unavailable">Medication data not available.Please wait or try again later.</string>
+    <string name="healthdata_pref_key">WIDGET_HEALTHDATA_KEY</string>
+    <string name="healthdata_unavailable">Health Data data not available.Please wait or try again later.</string>
 
     // Splash
 

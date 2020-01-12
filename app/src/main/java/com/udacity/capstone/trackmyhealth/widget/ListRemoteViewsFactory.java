@@ -5,7 +5,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.udacity.capstone.trackmyhealth.R;
-import com.udacity.capstone.trackmyhealth.database.Medication;
+import com.udacity.capstone.trackmyhealth.database.HealthData;
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
 
 /**
@@ -14,7 +14,7 @@ import com.udacity.capstone.trackmyhealth.utils.Prefs;
 //  REf - https://www.sitepoint.com/killer-way-to-show-a-list-of-items-in-android-collection-widget/
 public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private Context mContext;
-    private Medication medication;
+    private HealthData healthData;
 
     public ListRemoteViewsFactory(Context context) {
         this.mContext = context;
@@ -27,7 +27,7 @@ public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public void onDataSetChanged() {
-        medication = Prefs.GetMedicationFromPreference(mContext);
+        healthData = Prefs.GetHealthDataFromPreference(mContext);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.medications_app_widget_list_item);
+        RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.healthdata_app_widget_list_item);
 
-        row.setTextViewText(R.id.medicine_text, medication.getName());
+        row.setTextViewText(R.id.healthdata_text, healthData.getA1c());
 
         return row;
     }

@@ -8,28 +8,28 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.udacity.capstone.trackmyhealth.R;
-import com.udacity.capstone.trackmyhealth.database.Medication;
+import com.udacity.capstone.trackmyhealth.database.HealthData;
 import com.udacity.capstone.trackmyhealth.ui.MainActivity;
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
 
 
-public class MedicationWidgetProvider extends AppWidgetProvider {
+public class HealthDataWidgetProvider extends AppWidgetProvider {
 
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                        int appWidgetId) {
-        Medication medication = Prefs.GetMedicationFromPreference(context);
-        if (medication != null) {
+        HealthData healthData = Prefs.GetHealthDataFromPreference(context);
+        if (healthData != null) {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.medications_app_widget);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.healthdata_app_widget);
 
-            views.setTextViewText(R.id.medication_widget_name_text, medication.getName());
-            views.setOnClickPendingIntent(R.id.medication_widget_name_text, pendingIntent);
+            views.setTextViewText(R.id.healthdata_widget_name_text, healthData.getA1c());
+            views.setOnClickPendingIntent(R.id.healthdata_widget_name_text, pendingIntent);
 
-            Intent intent = new Intent(context, MedicationWidgetService.class);
+            Intent intent = new Intent(context, HealthDataWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            views.setRemoteAdapter(R.id.medication_widget_data, intent);
+            views.setRemoteAdapter(R.id.healthdata_widget_data, intent);
             appWidgetManager.updateAppWidget(appWidgetId, views);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.medication_widget_data);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.healthdata_widget_data);
         }
     }
 
@@ -40,7 +40,7 @@ public class MedicationWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    public static void updateMedicationWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    public static void updateHealthDataWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
