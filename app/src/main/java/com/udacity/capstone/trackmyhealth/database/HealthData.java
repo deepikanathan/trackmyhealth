@@ -38,7 +38,7 @@ public class HealthData {
     private String ldl;
 
     @Ignore
-    public HealthData(String docname, String dateofvisit, String a1c, String bloodsugar, String triglycerides, String weight, String hdl, String ldl) {
+    public HealthData(String a1c, String bloodsugar, String dateofvisit, String docname, String hdl, String ldl, String triglycerides, String weight) {
         this.docname = docname;
         this.dateofvisit = dateofvisit;
         this.a1c = a1c;
@@ -49,7 +49,7 @@ public class HealthData {
         this.ldl = ldl;
     }
 
-    public HealthData(int id, String docname, String dateofvisit, String a1c, String bloodsugar, String triglycerides, String weight, String hdl, String ldl) {
+    public HealthData(String a1c, String bloodsugar, String dateofvisit, String docname, String hdl, String ldl, int id, String triglycerides, String weight) {
         this.id = id;
         this.docname = docname;
         this.dateofvisit = dateofvisit;

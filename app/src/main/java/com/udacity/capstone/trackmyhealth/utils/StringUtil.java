@@ -31,7 +31,8 @@ public class StringUtil {
         if (!"".equals(encoded)) {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                return mapper.readValue(Base64.decode(encoded, 0), HealthData.class);
+                byte[] decode = Base64.decode(encoded, 0);
+                return mapper.readValue(decode, HealthData.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
