@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +32,10 @@ import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.HealthData;
 
 import com.crashlytics.android.Crashlytics;
+import com.udacity.capstone.trackmyhealth.widget.HealthDataWidgetService;
 
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 import butterknife.BindView;
@@ -148,8 +152,18 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
         int id = item.getItemId();
         if (id == R.id.action_add_to_widget) {
 
-
-            return true;
+            List<HealthData> tasks = mAdapter.getTasks();
+            if (tasks != null && tasks.size() > 0) {
+                HealthData healthData = tasks.get(0);
+                Crashlytics.log(Log.VERBOSE, TAG, "Add To Widget HEALTHDATA : " + healthData.getDateofvisit());
+                HealthDataWidgetService.updateWidget(this, healthData);
+                return true;
+            }
+            else {
+                Toast.makeText(this, "Did not find any Health Data to add to widget", Toast.LENGTH_LONG);
+                Crashlytics.log(Log.VERBOSE, TAG, "Did not find any Health Data to add to widget");
+                return super.onOptionsItemSelected(item);
+            }
         }
         else {
             return super.onOptionsItemSelected(item);

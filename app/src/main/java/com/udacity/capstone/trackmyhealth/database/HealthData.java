@@ -135,7 +135,7 @@ public class HealthData {
 
     @Override
     public boolean equals(Object obj) {
-        Medication m = (Medication) obj;
+        HealthData m = (HealthData) obj;
         return id == m.getId();
     }
 }

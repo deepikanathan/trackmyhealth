@@ -13,7 +13,7 @@ import com.udacity.capstone.trackmyhealth.utils.Prefs;
 public class HealthDataWidgetService extends RemoteViewsService {
 
     public static void updateWidget(Context context, HealthData healthData) {
-        Prefs.AddRecipeToPreference(context, healthData);
+        Prefs.AddHealthDataToPreference(context, healthData);
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, HealthDataWidgetProvider.class));
