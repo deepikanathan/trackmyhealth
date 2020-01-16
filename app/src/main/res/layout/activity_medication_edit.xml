@@ -34,8 +34,7 @@
                 android:background="@drawable/border"
                 android:hint="@string/med_name"
                 android:inputType="text"
-                android:padding="@dimen/extra_large_padding"
-                android:autofillHints="@string/med_name" />
+                android:padding="@dimen/extra_large_padding" />
 
             <EditText
                 android:id="@+id/med_dose"
@@ -45,8 +44,7 @@
                 android:background="@drawable/border"
                 android:hint="@string/med_dose"
                 android:inputType="number"
-                android:padding="@dimen/extra_large_padding"
-                android:autofillHints="@string/med_dose" />
+                android:padding="@dimen/extra_large_padding" />
 
             <EditText
                 android:id="@+id/med_unit"
@@ -56,8 +54,7 @@
                 android:background="@drawable/border"
                 android:hint="@string/med_unit"
                 android:inputType="text"
-                android:padding="@dimen/extra_large_padding"
-                android:autofillHints="@string/med_unit" />
+                android:padding="@dimen/extra_large_padding" />
 
             <EditText
                 android:id="@+id/med_frequency"
@@ -67,8 +64,7 @@
                 android:background="@drawable/border"
                 android:hint="@string/med_frequency"
                 android:inputType="text"
-                android:padding="@dimen/extra_large_padding"
-                android:autofillHints="@string/med_frequency" />
+                android:padding="@dimen/extra_large_padding"/>
 
             <Button
                 android:id="@+id/button"

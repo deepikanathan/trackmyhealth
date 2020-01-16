@@ -107,8 +107,8 @@
     <string name="add_health_data">Log Data</string>
     <string name="health_value">5.2mg/dL</string>
     <string name="health_journal">Health Journal</string>
-
-
+    <string name="background">Background Image</string>
+    <string name="mapButton">Map Button</string>
 
 
 </resources>

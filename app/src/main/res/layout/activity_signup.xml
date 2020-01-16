@@ -44,9 +44,7 @@
                     app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:autofillHints="@string/profile_image_sign_up"
-                    android:contentDescription="@string/profile_image_sign_up"
-                    android:hint="@string/profile_image_sign_up"/>
+                    android:contentDescription="@string/profile_image_sign_up"/>
 
                 <Button
                     android:id="@+id/importProfilePicture"
@@ -60,7 +58,6 @@
                     app:layout_constraintStart_toEndOf="@+id/profileImageView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:autofillHints="@string/profile_image_sign_up"
                     android:hint="@string/profile_image_sign_up" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,7 +70,6 @@
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
                 android:inputType="textCapCharacters"
-                android:autofillHints="@string/first_name_sign_up"
                 android:hint="@string/first_name_sign_up"
                 tools:text="justin"/>
 
@@ -85,7 +81,6 @@
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
-                android:autofillHints="@string/last_name_sign_up"
                 android:hint="@string/last_name_sign_up"
                 tools:text="timberlake"/>
 
@@ -96,7 +91,6 @@
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
-                android:autofillHints="@string/dob_sign_up"
                 android:hint="@string/dob_sign_up"
                 tools:text="01/01/1980"/>
 
@@ -104,7 +98,6 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/email_sign_up"
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
@@ -117,7 +110,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:autofillHints="@string/ice_name_sign_up"
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
@@ -129,7 +121,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:autofillHints="@string/ice_phone_number_sign_up"
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
@@ -165,7 +156,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="@string/height_sign_up"
-                android:autofillHints="@string/height_sign_up"
                 android:layout_margin="@dimen/extra_large_padding"
                 android:padding="@dimen/extra_large_padding"
                 android:background="@drawable/border"
@@ -177,7 +167,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:autofillHints="@string/weight_sign_up"
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
@@ -201,7 +190,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:autofillHints="@string/pcp_name_sign_up"
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
@@ -213,7 +201,6 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
                     android:hint="@string/pcp_address_sign_up"
-                    android:autofillHints="@string/pcp_address_sign_up"
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
@@ -224,7 +211,6 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:hint="@string/pcp_city_sign_up"
-                    android:autofillHints="@string/pcp_city_sign_up"
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
@@ -248,7 +234,6 @@
                     android:id="@+id/pcpZipEditText"
                     android:inputType="number"
                     android:hint="@string/pcp_zip_sign_up"
-                    android:autofillHints="@string/pcp_zip_sign_up"
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
@@ -264,7 +249,6 @@
                     android:layout_margin="@dimen/extra_large_padding"
                     android:padding="@dimen/extra_large_padding"
                     android:background="@drawable/border"
-                    android:autofillHints="@string/pcp_phone_sign_up"
                     tools:text="0000000000"
                     android:maxLength="10"/>
 

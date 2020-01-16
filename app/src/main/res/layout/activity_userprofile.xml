@@ -333,7 +333,6 @@
 
 
             <ImageButton
-
                 android:id="@+id/mapItButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -343,7 +342,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/pcpTitle"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/pcpTitle"
-                app:layout_constraintTop_toBottomOf="@+id/pcpPhone" />
+                app:layout_constraintTop_toBottomOf="@+id/pcpPhone"
+                android:contentDescription="@string/mapButton"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

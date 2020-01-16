@@ -8,8 +8,8 @@
         android:layout_height="365dp"
         android:layout_gravity="fill"
         android:scaleType="fitXY"
-        android:src="@drawable/bg" />
-        />
+        android:src="@drawable/bg"
+        android:contentDescription="@string/background" />
 
     <TextView
         android:id="@+id/title_textView"
