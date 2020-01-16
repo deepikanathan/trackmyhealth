@@ -99,14 +99,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, SignUpActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Edit Profile button pressed");
-               // i.putExtra(Constants.UPDATE_User, sharedpreferences);
-                startActivity(i);
-            }
+        editProfile.setOnClickListener(v -> {
+            Intent i = new Intent(ProfileActivity.this, SignUpActivity.class);
+            Crashlytics.log(Log.VERBOSE, TAG, "Edit Profile button pressed");
+           // i.putExtra(Constants.UPDATE_User, sharedpreferences);
+            startActivity(i);
         });
 
         //  name
@@ -126,9 +123,9 @@ public class ProfileActivity extends AppCompatActivity {
         if (sharedpreferences.contains(getResources().getString(R.string.gender))) {
             boolean isMale = sharedpreferences.getBoolean(getResources().getString(R.string.gender), false);
             if (isMale)
-                gender.setText("Male");
+                gender.setText(getString(R.string.gender_male_sign_up));
             else
-                gender.setText("Female");
+                gender.setText(getString(R.string.gender_female_sign_up));
         }
 
         //  ICE
@@ -184,12 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMap();
-            }
-        });
+        mapButton.setOnClickListener(v -> showMap());
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 

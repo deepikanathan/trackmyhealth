@@ -40,7 +40,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Me
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MedicationAdapter.MedicationViewHolder medicationViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MedicationViewHolder medicationViewHolder, int i) {
         medicationViewHolder.name.setText(mMedicationList.get(i).getName());
         medicationViewHolder.dose.setText(mMedicationList.get(i).getDose());
         medicationViewHolder.unit.setText(mMedicationList.get(i).getUnit());
@@ -80,14 +80,11 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Me
             frequency = itemView.findViewById(R.id.frequency);
 
             editImage = itemView.findViewById(R.id.edit_Image);
-            editImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int elementId = mMedicationList.get(getAdapterPosition()).getId();
-                    Intent i = new Intent(context, MedicationEditActivity.class);
-                    i.putExtra(Constants.UPDATE_Medication_Id, elementId);
-                    context.startActivity(i);
-                }
+            editImage.setOnClickListener(v -> {
+                int elementId = mMedicationList.get(getAdapterPosition()).getId();
+                Intent i = new Intent(context, MedicationEditActivity.class);
+                i.putExtra(Constants.UPDATE_Medication_Id, elementId);
+                context.startActivity(i);
             });
         }
     }

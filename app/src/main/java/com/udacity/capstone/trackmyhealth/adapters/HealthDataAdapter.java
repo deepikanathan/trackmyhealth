@@ -34,13 +34,13 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
 
     @NonNull
     @Override
-    public HealthDataAdapter.HealthDataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HealthDataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.health_data_item, viewGroup, false);
-        return new HealthDataAdapter.HealthDataViewHolder(view);
+        return new HealthDataViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HealthDataAdapter.HealthDataViewHolder healthDataViewHolder, int i) {
+    public void onBindViewHolder(@NonNull HealthDataViewHolder healthDataViewHolder, int i) {
         //healthDataViewHolder.docName.setText(mHealthDataList.get(i).getDocname());
         healthDataViewHolder.visitDate.setText(mHealthDataList.get(i).getDateofvisit());
         healthDataViewHolder.a1c.setText(mHealthDataList.get(i).getA1c());
@@ -96,16 +96,11 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.He
             ldl = itemView.findViewById(R.id.ldl_value);
             hdl = itemView.findViewById(R.id.hdl_value);
 
-            a1cKey.setOnClickListener(new View.OnClickListener() {
+            a1cKey.setOnClickListener(v -> {
+                Toast.makeText(context, "clicked a1c", Toast.LENGTH_SHORT).show();
 
-
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "clicked a1c", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(context, GraphActivity.class);
-                    context.startActivity(intent);
-                }
+                Intent intent = new Intent(context, GraphActivity.class);
+                context.startActivity(intent);
             });
     }
 }

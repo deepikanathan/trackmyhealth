@@ -61,12 +61,9 @@ public class MedicationsActivity extends AppCompatActivity {
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Crashlytics.log(Log.VERBOSE, TAG, "Edit button pressed");
-                startActivity(new Intent(MedicationsActivity.this, MedicationEditActivity.class));
-            }
+        floatingActionButton.setOnClickListener(v -> {
+            Crashlytics.log(Log.VERBOSE, TAG, "Edit button pressed");
+            startActivity(new Intent(MedicationsActivity.this, MedicationEditActivity.class));
         });
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -85,14 +82,11 @@ public class MedicationsActivity extends AppCompatActivity {
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int position = viewHolder.getAdapterPosition();
-                        List<Medication> tasks = mAdapter.getTasks();
-                        mDb.medicationDao().delete(tasks.get(position));
-                        Crashlytics.log(Log.VERBOSE, TAG, "Delete medication in position : " + position);
-                    }
+                AppExecutors.getInstance().diskIO().execute(() -> {
+                    int position = viewHolder.getAdapterPosition();
+                    List<Medication> tasks = mAdapter.getTasks();
+                    mDb.medicationDao().delete(tasks.get(position));
+                    Crashlytics.log(Log.VERBOSE, TAG, "Delete medication in position : " + position);
                 });
             }
         }).attachToRecyclerView(mRecyclerView);
@@ -102,12 +96,7 @@ public class MedicationsActivity extends AppCompatActivity {
     }
 
     private void retrieveTasks() {
-        mDb.medicationDao().getAllMedications().observe(this, new Observer<List<Medication>>() {
-            @Override
-            public void onChanged(@Nullable List<Medication> medications) {
-                mAdapter.setTasks(medications);
-            }
-        });
+        mDb.medicationDao().getAllMedications().observe(this, medications -> mAdapter.setTasks(medications));
     }
 
 

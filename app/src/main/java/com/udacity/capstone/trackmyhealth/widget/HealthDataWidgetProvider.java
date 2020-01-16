@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.udacity.capstone.trackmyhealth.R;
-import com.udacity.capstone.trackmyhealth.database.HealthData;
 import com.udacity.capstone.trackmyhealth.ui.MainActivity;
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
+
+import models.HealthData;
 
 
 public class HealthDataWidgetProvider extends AppWidgetProvider {

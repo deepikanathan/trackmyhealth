@@ -18,16 +18,21 @@ import com.udacity.capstone.trackmyhealth.ui.SignUpActivity;
 
 public class MainFragment extends Fragment {
 
-    public static final String mypreference = "User";
+    private static final String mypreference = "User";
     boolean isFirstTimeAccess = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
-        if (prefs != null) {
-            isFirstTimeAccess = false;
+        try {
+            SharedPreferences prefs = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+            if (prefs != null) {
+                isFirstTimeAccess = false;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,11 +66,9 @@ public class MainFragment extends Fragment {
 //        return viewRoot;
         Button signUpButton = landing.findViewById(R.id.sign_up_button);
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), SignUpActivity.class);
-                startActivity(intent);
-            }
+        signUpButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity().getApplicationContext(), SignUpActivity.class);
+            startActivity(intent);
         });
         return viewRoot;
     }

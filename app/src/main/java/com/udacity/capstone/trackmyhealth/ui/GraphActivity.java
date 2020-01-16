@@ -35,10 +35,9 @@ public class GraphActivity extends AppCompatActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LineChartView lineChartView = findViewById(R.id.chart);
-        String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-                "Oct", "Nov", "Dec"};
+        String[] axisData = setA1CXAxis();// {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
 
-        int[] yAxisData = {50, 20, 15, 30, 20, 60, 15, 40, 45, 10, 90, 18};
+        int[] yAxisData = setA1CYAxis();//{50, 20, 15, 30, 20, 60, 15, 40, 45, 10, 90, 18};
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
 
@@ -79,11 +78,12 @@ public class GraphActivity extends AppCompatActivity {
         lineChartView.setCurrentViewport(viewport);
     }
 
-    private void setA1CAxis() {
-        String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-                "Oct", "Nov", "Dec"};
+    private String[] setA1CXAxis() {
+       return new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
+    }
 
-        int[] yAxisData = {4,5,6,7,8,9,10,11,12};
+    private int[] setA1CYAxis() {
+        return new int[]{4,5,6,7,8,9,10,11,12};
     }
 
 

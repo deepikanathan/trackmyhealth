@@ -66,13 +66,10 @@ public class MedicationEditActivity extends AppCompatActivity {
             button.setText(R.string.update);
             mMedicationId = intent.getIntExtra(Constants.UPDATE_Medication_Id, -1);
 
-            AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                @Override
-                public void run() {
-                    Medication medication = mDb.medicationDao().loadMedicationById(mMedicationId);
-                    Crashlytics.log(Log.VERBOSE, TAG, "Editing Medication : " + medication.getName());
-                    populateUI(medication);
-                }
+            AppExecutors.getInstance().diskIO().execute(() -> {
+                Medication medication = mDb.medicationDao().loadMedicationById(mMedicationId);
+                Crashlytics.log(Log.VERBOSE, TAG, "Editing Medication : " + medication.getName());
+                populateUI(medication);
             });
         }
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
@@ -90,12 +87,7 @@ public class MedicationEditActivity extends AppCompatActivity {
         unit = findViewById(R.id.med_unit);
         frequency = findViewById(R.id.med_frequency);
         button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSaveButtonClicked();
-            }
-        });
+        button.setOnClickListener(v -> onSaveButtonClicked());
     }
 
     private boolean checkDataEntered() {
@@ -164,11 +156,10 @@ public class MedicationEditActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        // Respond to the action bar's Up/Home button
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

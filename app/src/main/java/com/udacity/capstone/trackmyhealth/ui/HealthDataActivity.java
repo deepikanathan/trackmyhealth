@@ -1,5 +1,7 @@
 package com.udacity.capstone.trackmyhealth.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.HealthData;
 
 import com.crashlytics.android.Crashlytics;
+import com.udacity.capstone.trackmyhealth.widget.HealthDataWidgetProvider;
 import com.udacity.capstone.trackmyhealth.widget.HealthDataWidgetService;
 
 import java.util.Dictionary;
@@ -72,12 +75,9 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
         mTracker = application.getDefaultTracker();
 
 
-        addHealthDataFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Crashlytics.log(Log.VERBOSE, TAG, "Add Health Data Button pressed");
-                startActivity(new Intent(HealthDataActivity.this, HealthDataEditActivity.class));
-            }
+        addHealthDataFAB.setOnClickListener(v -> {
+            Crashlytics.log(Log.VERBOSE, TAG, "Add Health Data Button pressed");
+            startActivity(new Intent(HealthDataActivity.this, HealthDataEditActivity.class));
         });
 
 
@@ -97,20 +97,17 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try{
-                            int position = viewHolder.getAdapterPosition();
-                            List<HealthData> tasks = mAdapter.getTasks();
-                            mDb.healthDataDao().delete(tasks.get(position));
+                AppExecutors.getInstance().diskIO().execute(() -> {
+                    try{
+                        int position = viewHolder.getAdapterPosition();
+                        List<HealthData> tasks = mAdapter.getTasks();
+                        mDb.healthDataDao().delete(tasks.get(position));
 
-                            Crashlytics.log(Log.VERBOSE, TAG, "Delete Health Data");
-                            Crashlytics.setInt("Health Data Position", position);
-                        }
-                        catch (Exception ex) {
-                            Crashlytics.logException(new Exception(TAG + " : Exception when deleting Health Data"));
-                        }
+                        Crashlytics.log(Log.VERBOSE, TAG, "Delete Health Data");
+                        Crashlytics.setInt("Health Data Position", position);
+                    }
+                    catch (Exception ex) {
+                        Crashlytics.logException(new Exception(TAG + " : Exception when deleting Health Data"));
                     }
                 });
             }
@@ -127,17 +124,12 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void retrieveTasks() {
-        mDb.healthDataDao().getAllHealthData().observe(this, new Observer<List<HealthData>>() {
-            @Override
-            public void onChanged(@Nullable List<HealthData> healthData) {
-                mAdapter.setTasks(healthData);
-            }
-        });
+        mDb.healthDataDao().getAllHealthData().observe(this, healthData -> mAdapter.setTasks(healthData));
     }
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "clicked", Toast.LENGTH_LONG);
+       // Toast.makeText(this, "clicked", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -155,12 +147,19 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
             List<HealthData> tasks = mAdapter.getTasks();
             if (tasks != null && tasks.size() > 0) {
                 HealthData healthData = tasks.get(0);
+
+                models.HealthData model = new models.HealthData(healthData.getA1c(), healthData.getBloodsugar(), healthData.getDateofvisit(), healthData.getDocname(),healthData.getHdl(),healthData.getLdl(),healthData.getTriglycerides(),healthData.getWeight());
+
                 Crashlytics.log(Log.VERBOSE, TAG, "Add To Widget HEALTHDATA : " + healthData.getDateofvisit());
-                HealthDataWidgetService.updateWidget(this, healthData);
+
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, HealthDataWidgetProvider.class));
+
+                HealthDataWidgetService.updateWidget(this, model);
                 return true;
             }
             else {
-                Toast.makeText(this, "Did not find any Health Data to add to widget", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Did not find any Health Data to add to widget", Toast.LENGTH_LONG).show();
                 Crashlytics.log(Log.VERBOSE, TAG, "Did not find any Health Data to add to widget");
                 return super.onOptionsItemSelected(item);
             }

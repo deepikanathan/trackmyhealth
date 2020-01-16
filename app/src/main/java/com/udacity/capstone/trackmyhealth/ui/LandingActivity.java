@@ -41,11 +41,7 @@ public class LandingActivity extends AppCompatActivity {
         mTracker = application.getDefaultTracker();
 
         Button signUpButton = findViewById(R.id.sign_up_button);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                InvokeSignUpActivity();
-            }
-        });
+        signUpButton.setOnClickListener(v -> InvokeSignUpActivity());
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 

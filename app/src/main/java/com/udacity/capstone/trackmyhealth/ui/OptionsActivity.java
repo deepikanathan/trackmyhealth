@@ -46,31 +46,22 @@ public class OptionsActivity extends AppCompatActivity {
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Profile Button pressed");
-                startActivity(intent);
-            }
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(OptionsActivity.this, ProfileActivity.class);
+            Crashlytics.log(Log.VERBOSE, TAG, "Profile Button pressed");
+            startActivity(intent);
         });
 
-        journalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, HealthDataActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Journal Button pressed");
-                startActivity(intent);
-            }
+        journalButton.setOnClickListener(v -> {
+            Intent intent = new Intent(OptionsActivity.this, HealthDataActivity.class);
+            Crashlytics.log(Log.VERBOSE, TAG, "Journal Button pressed");
+            startActivity(intent);
         });
 
-        medicationsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OptionsActivity.this, MedicationsActivity.class);
-                Crashlytics.log(Log.VERBOSE, TAG, "Medications Button pressed");
-                startActivity(intent);
-            }
+        medicationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(OptionsActivity.this, MedicationsActivity.class);
+            Crashlytics.log(Log.VERBOSE, TAG, "Medications Button pressed");
+            startActivity(intent);
         });
 
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");

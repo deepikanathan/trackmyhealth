@@ -6,23 +6,9 @@ import java.util.Locale;
 
 public class PopulateSpinner {
 
-    public static ArrayList<String> GetCountry() {
-
-        Locale[] locales = Locale.getAvailableLocales();
-        ArrayList<String> countries = new ArrayList<String>();
-        for (Locale locale : locales) {
-            String country = locale.getDisplayCountry();
-            if (country.trim().length() > 0 && !countries.contains(country)) {
-                countries.add(country);
-            }
-        }
-        return countries;
-    }
-
     public static ArrayList<String> GetStates() {
 
-        int stateCount = 0;
-        ArrayList<String> stateNames = new ArrayList<String>();
+        ArrayList<String> stateNames = new ArrayList<>();
         stateNames.add("None");
         stateNames.add("Alabama");
         stateNames.add("Alaska");

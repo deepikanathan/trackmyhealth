@@ -107,12 +107,9 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAccount();
-                Crashlytics.log(Log.VERBOSE, TAG, "SignUp button pressed");
-            }
+        signUpButton.setOnClickListener(v -> {
+            createAccount();
+            Crashlytics.log(Log.VERBOSE, TAG, "SignUp button pressed");
         });
 
         dobEditText.setOnClickListener(this);
@@ -128,17 +125,13 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         populateState(stateSpinner);
 
         Button buttonLoadImage = findViewById(R.id.importProfilePicture);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+        buttonLoadImage.setOnClickListener(arg0 -> {
 
-            @Override
-            public void onClick(View arg0) {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
         });
 
         loadValues();
@@ -252,7 +245,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
 
                 Uri selectedImage = data.getData();
-                InputStream imageStream = null;
+                InputStream imageStream;
                 imageStream = getContentResolver().openInputStream(selectedImage);
                 Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
                 ImageView imageView = findViewById(R.id.profileImageView);
@@ -269,7 +262,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         ArrayList<String> stateList = PopulateSpinner.GetStates();
         Collections.sort(stateList);
 
-        ArrayAdapter<String> stateAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stateList);
+        ArrayAdapter<String> stateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, stateList);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(stateAdapter);
     }
@@ -277,11 +270,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        switch (parent.getId())
-        {
-            case R.id.state_sign_up_spinner:
-                state = parent.getItemAtPosition(position).toString();
-                break;
+        if (parent.getId() == R.id.state_sign_up_spinner) {
+            state = parent.getItemAtPosition(position).toString();
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -413,13 +403,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog datePickerDialog;
-            datePickerDialog = new DatePickerDialog(this,new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    dobEditText.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
-                }
-            }, mYear, mMonth, mDay);
+            datePickerDialog = new DatePickerDialog(this, (view, year, monthOfYear, dayOfMonth) -> dobEditText.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year), mYear, mMonth, mDay);
 
             datePickerDialog.show();
         }

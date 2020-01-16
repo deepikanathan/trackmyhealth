@@ -45,13 +45,10 @@ public class HealthDataEditActivity extends AppCompatActivity {
             button.setText(R.string.update);
             mHealthDataId = intent.getIntExtra(Constants.UPDATE_Health_Data_Id, -1);
 
-            AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                @Override
-                public void run() {
-                    HealthData healthData = mDb.healthDataDao().loadHealthDataById(mHealthDataId);
-                    populateUI(healthData);
-                    Crashlytics.log(Log.VERBOSE, TAG, "HealthDataEditActivity PopulateUI");
-                }
+            AppExecutors.getInstance().diskIO().execute(() -> {
+                HealthData healthData = mDb.healthDataDao().loadHealthDataById(mHealthDataId);
+                populateUI(healthData);
+                Crashlytics.log(Log.VERBOSE, TAG, "HealthDataEditActivity PopulateUI");
             });
         }
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
@@ -74,12 +71,7 @@ public class HealthDataEditActivity extends AppCompatActivity {
         hdl = findViewById(R.id.hdl);
 
         button = findViewById(R.id.add_health_data);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSaveButtonClicked();
-            }
-        });
+        button.setOnClickListener(v -> onSaveButtonClicked());
     }
 
     private void populateUI(HealthData healthData) {
@@ -162,14 +154,14 @@ public class HealthDataEditActivity extends AppCompatActivity {
                 Crashlytics.setString("LDL", ldl.getText().toString());
                 Crashlytics.setString("HDL", hdl.getText().toString());
                 final HealthData data = new HealthData(
-                        docName.getText().toString(),
-                        visitDate.getText().toString(),
                         a1c.getText().toString(),
                         bloodsugar.getText().toString(),
-                        triglycerides.getText().toString(),
-                        weight.getText().toString(),
+                        visitDate.getText().toString(),
+                        docName.getText().toString(),
+                        hdl.getText().toString(),
                         ldl.getText().toString(),
-                        hdl.getText().toString());
+                        triglycerides.getText().toString(),
+                        weight.getText().toString());
 
                 AppExecutors.getInstance().diskIO().execute(() -> {
                     if (!intent.hasExtra(Constants.UPDATE_Health_Data_Id)) {
