@@ -11,7 +11,7 @@ import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.ui.MainActivity;
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
 
-import models.HealthData;
+import com.udacity.capstone.trackmyhealth.models.HealthData;
 
 
 public class HealthDataWidgetProvider extends AppWidgetProvider {
@@ -23,14 +23,19 @@ public class HealthDataWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.healthdata_app_widget);
 
-            views.setTextViewText(R.id.healthdata_widget_name_text, healthData.getA1c());
-            views.setOnClickPendingIntent(R.id.healthdata_widget_name_text, pendingIntent);
+            views.setTextViewText(R.id.a1c_widget, healthData.getA1c());
+            views.setTextViewText(R.id.bloodsugar_widget, healthData.getBloodsugar());
+            views.setTextViewText(R.id.triglycerides_widget, healthData.getTriglycerides());
+            views.setTextViewText(R.id.weight_widget, healthData.getWeight());
+            views.setTextViewText(R.id.hdl_widget, healthData.getHdl());
+            views.setTextViewText(R.id.ldl_widget, healthData.getLdl());
+            //views.setOnClickPendingIntent(R.id.a1c_widget, pendingIntent);
 
             Intent intent = new Intent(context, HealthDataWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            views.setRemoteAdapter(R.id.healthdata_widget_data, intent);
+            //views.setRemoteAdapter(R.id.healthdata_widget_data, intent);
             appWidgetManager.updateAppWidget(appWidgetId, views);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.healthdata_widget_data);
+            //appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.healthdata_widget_data);
         }
     }
 

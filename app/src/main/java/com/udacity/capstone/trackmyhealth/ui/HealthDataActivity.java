@@ -8,24 +8,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 import com.udacity.capstone.trackmyhealth.R;
 import com.udacity.capstone.trackmyhealth.adapters.HealthDataAdapter;
 import com.udacity.capstone.trackmyhealth.analytics.AnalyticsApplication;
@@ -37,8 +29,6 @@ import com.crashlytics.android.Crashlytics;
 import com.udacity.capstone.trackmyhealth.widget.HealthDataWidgetProvider;
 import com.udacity.capstone.trackmyhealth.widget.HealthDataWidgetService;
 
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.List;
 
 import butterknife.BindView;
@@ -148,7 +138,7 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
             if (tasks != null && tasks.size() > 0) {
                 HealthData healthData = tasks.get(0);
 
-                models.HealthData model = new models.HealthData(healthData.getA1c(), healthData.getBloodsugar(), healthData.getDateofvisit(), healthData.getDocname(),healthData.getHdl(),healthData.getLdl(),healthData.getTriglycerides(),healthData.getWeight());
+                com.udacity.capstone.trackmyhealth.models.HealthData model = new com.udacity.capstone.trackmyhealth.models.HealthData(healthData.getA1c(), healthData.getBloodsugar(), healthData.getDateofvisit(), healthData.getDocname(),healthData.getHdl(),healthData.getLdl(),healthData.getTriglycerides(),healthData.getWeight());
 
                 Crashlytics.log(Log.VERBOSE, TAG, "Add To Widget HEALTHDATA : " + healthData.getDateofvisit());
 

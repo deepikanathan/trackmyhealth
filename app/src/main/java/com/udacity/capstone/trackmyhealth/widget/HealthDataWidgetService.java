@@ -8,7 +8,7 @@ import android.widget.RemoteViewsService;
 
 import com.udacity.capstone.trackmyhealth.utils.Prefs;
 
-import models.HealthData;
+import com.udacity.capstone.trackmyhealth.models.HealthData;
 
 
 public class HealthDataWidgetService extends RemoteViewsService {

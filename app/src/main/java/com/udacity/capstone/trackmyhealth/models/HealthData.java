@@ -1,4 +1,4 @@
-package models;
+package com.udacity.capstone.trackmyhealth.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

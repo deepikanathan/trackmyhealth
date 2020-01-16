@@ -49,7 +49,7 @@
             android:padding="@dimen/extra_large_padding" />
 
         <EditText
-            android:id="@+id/a1c"
+            android:id="@+id/a1c_widget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/extra_large_padding"

@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 
 import com.udacity.capstone.trackmyhealth.R;
 
-import models.HealthData;
+import com.udacity.capstone.trackmyhealth.models.HealthData;
 
 public class Prefs {
     private static final String PREFS_NAME = "prefs";
 
-    public static void AddHealthDataToPreference(Context context, models.HealthData healthData) {
+    public static void AddHealthDataToPreference(Context context, com.udacity.capstone.trackmyhealth.models.HealthData healthData) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(context.getString(R.string.healthdata_pref_key), StringUtil.toBase64String(healthData));
