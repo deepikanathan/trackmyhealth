@@ -5,60 +5,163 @@
     android:background="@drawable/widget_background"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/a1c_widget"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
-    <TextView
-        android:id="@+id/bloodsugar_widget"
+        <TextView
+            android:id="@+id/a1c_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:text="@string/a1c"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/a1c_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
-    <TextView
-        android:id="@+id/triglycerides_widget"
+        <TextView
+            android:id="@+id/bloodsugar_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:text="@string/blood_sugar"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/bloodsugar_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
-    <TextView
-        android:id="@+id/weight_widget"
+        <TextView
+            android:id="@+id/trig_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="@string/trigycerides"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/triglycerides_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
-    <TextView
-        android:id="@+id/hdl_widget"
+        <TextView
+            android:id="@+id/weight_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="@string/weight"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/weight_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
-    <TextView
-        android:id="@+id/ldl_widget"
+        <TextView
+            android:id="@+id/hdl_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="@string/HDL"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/hdl_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_padding"
-        android:text="@string/healthdata_unavailable"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/extra_large_text" />
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:background="@color/colorGrayDark">
 
+        <TextView
+            android:id="@+id/ldl_key"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:text="@string/HDL"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            android:id="@+id/ldl_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
 
 
 </LinearLayout>

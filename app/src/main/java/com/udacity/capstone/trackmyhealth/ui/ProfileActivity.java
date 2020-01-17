@@ -200,7 +200,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showMap() {
-
         try {
             StringBuilder sb = new StringBuilder();
             if (!pcpAddress.getText().toString().isEmpty()) {
@@ -225,7 +224,6 @@ public class ProfileActivity extends AppCompatActivity {
         catch(Exception ex) {
             Crashlytics.logException(new Exception("Exception when showing Map"));
         }
-
     }
 
     @Override
