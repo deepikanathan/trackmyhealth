@@ -19,15 +19,6 @@ import java.util.Scanner;
  */
 public class NetworkUtils
 {
-    
-    private static final String API_KEY = "api_key";
-
-    /**
-     * Builds URL to retrieve JSON response
-     * @param context MainActivity
-     * @param med_name medicine name method
-     * @return URL
-     */
     public static URL buildUrl(Context context, String med_name)
     {
         String uri;
@@ -49,12 +40,6 @@ public class NetworkUtils
         return url;
     }
 
-    /**
-     * Gets JSON response from TMDB
-     * @param url path to TMDB API
-     * @return JSON Movie response
-     * @throws IOException exception
-     */
     public static String getResponseFromHttpUrl(URL url) throws IOException
     {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

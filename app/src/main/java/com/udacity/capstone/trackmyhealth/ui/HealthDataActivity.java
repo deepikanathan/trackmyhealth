@@ -146,6 +146,7 @@ public class HealthDataActivity extends AppCompatActivity implements View.OnClic
                 int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, HealthDataWidgetProvider.class));
 
                 HealthDataWidgetService.updateWidget(this, model);
+                Toast.makeText(this, " Health Data added to widget", Toast.LENGTH_LONG).show();
                 return true;
             }
             else {

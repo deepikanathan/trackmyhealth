@@ -62,7 +62,7 @@ public class HealthDataEditActivity extends AppCompatActivity {
     private void initViews() {
         docName = findViewById(R.id.doc_name);
         visitDate = findViewById(R.id.date_of_visit);
-        a1c = findViewById(R.id.a1c_widget);
+        a1c = findViewById(R.id.a1c);
         bloodsugar = findViewById(R.id.blood_sugar);
         triglycerides = findViewById(R.id.triglycerides);
         weight = findViewById(R.id.weight);

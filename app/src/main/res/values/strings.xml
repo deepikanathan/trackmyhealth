@@ -19,7 +19,7 @@
     <string name="profile_picture">ProfilePicture</string>
     <string name="first_name_sign_up">FirstName</string>
     <string name="last_name_sign_up">LastName</string>
-    <string name="dob_sign_up">DateOfBirth</string>
+    <string name="dob_sign_up">DateOfBirth (mm/dd/yyyy)</string>
     <string name="email_sign_up">Email</string>
     <string name="ice_name_sign_up">ICE Name</string>
     <string name="ice_phone_number_sign_up">ICE PhoneNumber</string>
@@ -97,7 +97,7 @@
     //  Add Health Data screen
     <string name="title_add_health_data">Log Health Data</string>
     <string name="physician_name">Physician Name</string>
-    <string name="date_of_visit">Date of Visit</string>
+    <string name="date_of_visit">Date of Visit (mm/dd/yyyy)</string>
     <string name="a1c">A1C (mg/dL)</string>
     <string name="blood_sugar">Blood Sugar (mg/dL)</string>
     <string name="trigycerides">Triglycerides (mg/dL)</string>
@@ -119,6 +119,9 @@
     <string name="edit_med_crash">Editing Medication :</string>
     <string name="no_med_found">No drugs</string>
     <string name="med_not_found_user_displ">Not matching medicine found</string>
+    <string name="med_dose_eg">eg 32.5 / 100 / 500</string>
+    <string name="med_unit_eg">eg mg/gm/IU</string>
+    <string name="med_freq_eg">eg once a day / twice a week</string>
 
 
 </resources>

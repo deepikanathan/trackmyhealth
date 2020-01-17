@@ -29,7 +29,7 @@ public class HealthDataWidgetProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.weight_widget, healthData.getWeight());
             views.setTextViewText(R.id.hdl_widget, healthData.getHdl());
             views.setTextViewText(R.id.ldl_widget, healthData.getLdl());
-            //views.setOnClickPendingIntent(R.id.a1c_widget, pendingIntent);
+            views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
 
             Intent intent = new Intent(context, HealthDataWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

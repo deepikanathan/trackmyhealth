@@ -53,38 +53,70 @@
                 android:id="@+id/med_dose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/extra_large_padding"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginRight="@dimen/extra_large_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
                 android:background="@drawable/border"
                 android:hint="@string/med_dose"
                 android:inputType="number"
                 android:padding="@dimen/extra_large_padding" />
+            <TextView
+                android:text="@string/med_dose_eg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/medium_text"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginBottom="@dimen/extra_large_padding"/>
 
             <EditText
                 android:id="@+id/med_unit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/extra_large_padding"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginRight="@dimen/extra_large_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
                 android:background="@drawable/border"
                 android:hint="@string/med_unit"
                 android:inputType="text"
                 android:padding="@dimen/extra_large_padding" />
+            <TextView
+                android:text="@string/med_unit_eg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/medium_text"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginBottom="@dimen/extra_large_padding"/>
 
             <EditText
                 android:id="@+id/med_frequency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/extra_large_padding"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginRight="@dimen/extra_large_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
                 android:background="@drawable/border"
                 android:hint="@string/med_frequency"
                 android:inputType="text"
                 android:padding="@dimen/extra_large_padding"/>
+            <TextView
+                android:text="@string/med_freq_eg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/medium_text"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginBottom="@dimen/extra_large_padding"/>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/extra_large_padding"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginRight="@dimen/extra_large_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
                 android:background="@drawable/border_back"
                 android:padding="@dimen/extra_large_padding"
                 android:text="@string/med_add" />
