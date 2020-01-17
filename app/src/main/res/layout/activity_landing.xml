@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/almendra"
         android:gravity="center"
-        android:paddingTop="@dimen/extra_large_padding"
+        android:paddingTop="@dimen/extra_large_text"
         android:text="@string/title_landing"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />

@@ -1,5 +1,6 @@
 package com.udacity.capstone.trackmyhealth.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,9 +9,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +24,8 @@ import com.udacity.capstone.trackmyhealth.constants.Constants;
 import com.udacity.capstone.trackmyhealth.database.AppMedicationDatabase;
 import com.udacity.capstone.trackmyhealth.database.AppExecutors;
 import com.udacity.capstone.trackmyhealth.database.Medication;
+import com.udacity.capstone.trackmyhealth.utils.FetchMedicationTask;
+import com.udacity.capstone.trackmyhealth.utils.NetworkUtils;
 
 import butterknife.BindView;
 
@@ -29,7 +34,7 @@ public class MedicationEditActivity extends AppCompatActivity {
     private static String TAG = "MedicationEditActivity";
 
     @BindView(R.id.med_name)
-    EditText name;
+    public EditText name;
     @BindView(R.id.med_dose)
     EditText dose;
     @BindView(R.id.med_unit)
@@ -43,6 +48,7 @@ public class MedicationEditActivity extends AppCompatActivity {
     Intent intent;
     private AppMedicationDatabase mDb;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +60,6 @@ public class MedicationEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getWindow().setSoftInputMode(
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         initViews();
 
         mDb = AppMedicationDatabase.getInstance(getApplicationContext());
@@ -68,10 +70,42 @@ public class MedicationEditActivity extends AppCompatActivity {
 
             AppExecutors.getInstance().diskIO().execute(() -> {
                 Medication medication = mDb.medicationDao().loadMedicationById(mMedicationId);
-                Crashlytics.log(Log.VERBOSE, TAG, "Editing Medication : " + medication.getName());
+                Crashlytics.log(Log.VERBOSE, TAG, getString(R.string.edit_med_crash) + medication.getName());
                 populateUI(medication);
             });
         }
+
+        name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (name.getRight() - name.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                        try {
+                            if (name.getText().toString().isEmpty() || name.getText().toString().toCharArray().length < 5) {
+                                name.setError(getString(R.string.med_name_search));
+                            }
+                            else {
+                                if (NetworkUtils.isNetworkAvailable(MedicationEditActivity.this)) {
+                                    Crashlytics.log(Log.VERBOSE, TAG, getString(R.string.search_med_nav_crash) + name.getText().toString());
+                                    new FetchMedicationTask(MedicationEditActivity.this, name.getText().toString()).execute();
+                                }
+                            }
+                        }
+                        catch (Exception e) {
+
+                            e.printStackTrace();
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+        });
+
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
@@ -96,22 +130,22 @@ public class MedicationEditActivity extends AppCompatActivity {
         if (isEmpty(name)) {
             allClear = false;
             name.requestFocus();
-            name.setError("Medication Name is required");
+            name.setError(getString(R.string.med_name_required));
         }
         if (isEmpty(dose)) {
             allClear = false;
             dose.requestFocus();
-            dose.setError("Medication Dose is required");
+            dose.setError(getString(R.string.med_dose_required));
         }
         if (isEmpty(unit)) {
             allClear = false;
             unit.requestFocus();
-            unit.setError("Medication Unit is required");
+            unit.setError(getString(R.string.med_unit_required));
         }
         if (isEmpty(frequency)) {
             allClear = false;
             frequency.requestFocus();
-            frequency.setError("Medication Frequency is required");
+            frequency.setError(getString(R.string.med_freq_required));
         }
 
         return allClear;
@@ -138,20 +172,20 @@ public class MedicationEditActivity extends AppCompatActivity {
                     medication.setId(mMedicationId);
                     mDb.medicationDao().update(medication);
                 }
-                Crashlytics.log(Log.VERBOSE, TAG, "Saving Medication : " + medication.getName());
+                Crashlytics.log(Log.VERBOSE, TAG, getString(R.string.save_med_crash) + medication.getName());
                 finish();
             });
         }
     }
 
-    private void populateUI(Medication person) {
-        if (person == null) {
+    private void populateUI(Medication medication) {
+        if (medication == null) {
             return;
         }
-        name.setText(person.getName());
-        dose.setText(person.getDose());
-        unit.setText(person.getUnit());
-        frequency.setText(person.getFrequency());
+        name.setText(medication.getName());
+        dose.setText(medication.getDose());
+        unit.setText(medication.getUnit());
+        frequency.setText(medication.getFrequency());
     }
 
     @Override

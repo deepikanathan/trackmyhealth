@@ -3,7 +3,6 @@ package com.udacity.capstone.trackmyhealth.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -45,13 +44,6 @@ public class LandingActivity extends AppCompatActivity {
         Crashlytics.log(Log.VERBOSE, TAG, "onCreate finished");
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        mTracker.setScreenName("Landing Activity");
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-//    }
 
     private void InvokeSignUpActivity() {
         Crashlytics.log(Log.VERBOSE, TAG, "SignUp clicked");

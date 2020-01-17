@@ -92,7 +92,7 @@
     <string name="once_a_day">once a day</string>
     <string name="update">Update</string>
     <string name="edit_medication">Edit Medication</string>
-    <string name="rx_api">https://rxnav.nlm.nih.gov/REST/approximateTerm?term</string>
+    <string name="rx_api">https://rxnav.nlm.nih.gov/REST/approximateTerm?</string>
 
     //  Add Health Data screen
     <string name="title_add_health_data">Log Health Data</string>
@@ -109,6 +109,16 @@
     <string name="health_journal">Health Journal</string>
     <string name="background">Background Image</string>
     <string name="mapButton">Map Button</string>
+    <string name="med_name_search">*enter 5 characters of medicine name and hit Search icon</string>
+    <string name="med_name_required">Medication Name is required</string>
+    <string name="med_dose_required">Medication Dose is required</string>
+    <string name="med_unit_required">Medication Unit is required</string>
+    <string name="med_freq_required">Medication Frequency is required</string>
+    <string name="save_med_crash">Saving Medication :</string>
+    <string name="search_med_nav_crash">Searching RxNav for medication name :</string>
+    <string name="edit_med_crash">Editing Medication :</string>
+    <string name="no_med_found">No drugs</string>
+    <string name="med_not_found_user_displ">Not matching medicine found</string>
 
 
 </resources>

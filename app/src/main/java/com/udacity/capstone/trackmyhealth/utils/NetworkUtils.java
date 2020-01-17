@@ -1,6 +1,8 @@
 package com.udacity.capstone.trackmyhealth.utils;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 import com.udacity.capstone.trackmyhealth.R;
@@ -32,7 +34,7 @@ public class NetworkUtils
         uri = context.getResources().getString(R.string.rx_api);
 
         Uri builtUri = Uri.parse(uri).buildUpon()
-                .appendQueryParameter(API_KEY, med_name)
+                .appendQueryParameter("term", med_name)
                 .build();
 
         URL url = null;
@@ -77,6 +79,13 @@ public class NetworkUtils
         }
     }
 
+    public static boolean isNetworkAvailable(Context context)
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 }

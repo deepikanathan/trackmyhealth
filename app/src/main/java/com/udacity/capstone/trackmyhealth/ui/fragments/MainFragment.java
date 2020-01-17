@@ -14,7 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.udacity.capstone.trackmyhealth.R;
+import com.udacity.capstone.trackmyhealth.ui.LandingActivity;
+import com.udacity.capstone.trackmyhealth.ui.MainActivity;
 import com.udacity.capstone.trackmyhealth.ui.SignUpActivity;
+import com.udacity.capstone.trackmyhealth.utils.FetchMedicationTask;
+import com.udacity.capstone.trackmyhealth.utils.NetworkUtils;
 
 public class MainFragment extends Fragment {
 
@@ -69,6 +73,8 @@ public class MainFragment extends Fragment {
         signUpButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity().getApplicationContext(), SignUpActivity.class);
             startActivity(intent);
+
+
         });
         return viewRoot;
     }

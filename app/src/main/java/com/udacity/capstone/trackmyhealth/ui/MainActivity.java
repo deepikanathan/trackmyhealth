@@ -12,7 +12,6 @@ import com.udacity.capstone.trackmyhealth.database.Medication;
 
 public class MainActivity extends AppCompatActivity {
 
-    Medication medication;
     private static String TAG = "MainActivity";
 
     @Override

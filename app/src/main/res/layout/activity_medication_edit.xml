@@ -30,11 +30,24 @@
                 android:id="@+id/med_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/extra_large_padding"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginRight="@dimen/extra_large_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
                 android:background="@drawable/border"
                 android:hint="@string/med_name"
                 android:inputType="text"
-                android:padding="@dimen/extra_large_padding" />
+                android:padding="@dimen/extra_large_padding"
+                android:drawableRight="@drawable/search_icon"/>
+
+            <TextView
+                android:text="@string/med_name_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/medium_text"
+                android:layout_marginLeft="@dimen/extra_large_padding"
+                android:layout_marginBottom="@dimen/extra_large_padding"/>
+
 
             <EditText
                 android:id="@+id/med_dose"
