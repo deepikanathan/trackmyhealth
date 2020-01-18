@@ -98,7 +98,7 @@ public class HealthDataEditActivity extends AppCompatActivity {
         if (isEmpty(visitDate)) {
             allClear = false;
             visitDate.requestFocus();
-            visitDate.setError("Physician Name is required");
+            visitDate.setError("Date of visit is required");
         }
         if (isEmpty(a1c)) {
             allClear = false;

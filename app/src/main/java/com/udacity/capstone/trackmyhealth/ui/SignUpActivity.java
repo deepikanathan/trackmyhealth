@@ -154,6 +154,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             }
             if (sharedpreferences.contains(getResources().getString(R.string.first_name_sign_up))) {
                 firstNameEditText.setText(sharedpreferences.getString(getResources().getString(R.string.first_name_sign_up), ""));
+
+                signUpButton.setText(R.string.save_profile);
             }
             if (sharedpreferences.contains(getResources().getString(R.string.last_name_sign_up))) {
                 lastNameTextView.setText(sharedpreferences.getString(getResources().getString(R.string.last_name_sign_up), ""));
@@ -231,6 +233,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
                 pcpPhoneEditText.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
             }
+
         }
         catch (Exception ex) {
             Crashlytics.logException(new Exception("Exception when loading SignUp screen values"));

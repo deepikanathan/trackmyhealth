@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -91,6 +92,9 @@ public class MedicationEditActivity extends AppCompatActivity {
                                 if (NetworkUtils.isNetworkAvailable(MedicationEditActivity.this)) {
                                     Crashlytics.log(Log.VERBOSE, TAG, getString(R.string.search_med_nav_crash) + name.getText().toString());
                                     new FetchMedicationTask(MedicationEditActivity.this, name.getText().toString()).execute();
+                                }
+                                else {
+                                    Toast.makeText(MedicationEditActivity.this, getString(R.string.network_unavailable), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }

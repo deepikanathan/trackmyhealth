@@ -140,12 +140,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         //  height
         if (sharedpreferences.contains(getResources().getString(R.string.height_sign_up))) {
-            height.setText(sharedpreferences.getString(getResources().getString(R.string.height_sign_up), ""));
+            height.setText(sharedpreferences.getString(getResources().getString(R.string.height_sign_up) , "")+ "cm");
         }
 
         //  weight
         if (sharedpreferences.contains(getResources().getString(R.string.weight_sign_up))) {
-            weight.setText(sharedpreferences.getString(getResources().getString(R.string.weight_sign_up), ""));
+            weight.setText(sharedpreferences.getString(getResources().getString(R.string.weight_sign_up) , "")+ "lb");
         }
 
         //  PCP Name
@@ -167,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity {
                         pcpZip.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_zip_sign_up), ""));
                         //  PCP Phone
                         if (sharedpreferences.contains(getResources().getString(R.string.pcp_phone_sign_up))) {
-                            pcpPhone.setText(sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
+                            pcpPhone.setText("Ph:" + sharedpreferences.getString(getResources().getString(R.string.pcp_phone_sign_up), ""));
                             pcpTitle.setVisibility(View.VISIBLE);
                             pcpAddress.setVisibility(View.VISIBLE);
                             pcpCity.setVisibility(View.VISIBLE);

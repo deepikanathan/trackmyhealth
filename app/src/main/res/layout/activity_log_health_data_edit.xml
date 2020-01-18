@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_add_health_data"
-            android:textSize="30sp"
+            android:textSize="@dimen/large_text"
             android:textStyle="bold"
             android:layout_gravity="center"/>
 
@@ -32,90 +32,89 @@
             android:id="@+id/doc_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/physician_name"
-            android:inputType="text"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="textCapCharacters"
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/date_of_visit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/date_of_visit"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/a1c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/a1c"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="numberDecimal"
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/blood_sugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/blood_sugar"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="numberDecimal"
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/triglycerides"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/trigycerides"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="numberDecimal"
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/weight"
             android:inputType="numberDecimal"
-            android:padding="@dimen/extra_large_padding" />
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/hdl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/HDL"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="numberDecimal"
+            android:padding="@dimen/medium_padding" />
 
         <EditText
             android:id="@+id/ldl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border"
             android:hint="@string/LDL"
-            android:inputType="date"
-            android:padding="@dimen/extra_large_padding" />
+            android:inputType="numberDecimal"
+            android:padding="@dimen/medium_padding" />
 
         <Button
             android:id="@+id/add_health_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/extra_large_padding"
+            android:layout_margin="@dimen/large_padding"
             android:background="@drawable/border_back"
-            android:padding="@dimen/extra_large_padding"
+            android:padding="@dimen/large_padding"
             android:text="@string/add_health_data" />
 
     </LinearLayout>
